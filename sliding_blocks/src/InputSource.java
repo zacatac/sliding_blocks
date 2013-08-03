@@ -7,6 +7,8 @@ public class InputSource {
 
     private BufferedReader in;
     private int myLineNumber = 0;
+    //test line comment
+    //
 
     public InputSource ( ) {
         try {
