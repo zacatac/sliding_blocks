@@ -1,15 +1,13 @@
+
 public class Board {
 
-  private int[][] tray=new int[256*256-1][4];
-	int[] dimension=new int[2];
+	private int[][] tray =new int[256*256-1][4];
 	int rows, columns;
 	int count = 0;
+	private boolean[][] whiteSpace;
 	
-	public Board(String x) {
-		String[] input = x.split("\\s+");
-		for (int i=0;i<2;i++) {
-			dimension[i] = Integer.parseInt(input[i]);
-		}
+	public Board(int rows, int columns) {
+		whiteSpace = new boolean[rows][columns];
 	}
 	
 	//add new Block
