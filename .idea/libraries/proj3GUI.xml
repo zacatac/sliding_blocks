@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="proj3GUI">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/sliding_blocks/GUI/proj3GUI.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
