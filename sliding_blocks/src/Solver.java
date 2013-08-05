@@ -6,10 +6,16 @@
  * To change this template use File | Settings | File Templates.
  */
 public class Solver {
+    public static final boolean iamDebugging = false;
 
 
 
     public static void main(String[] args) {
+        if (args.length == 0){
+            System.err.println("You must input something");
+            System.exit(1);
+        }
+
         InputSource newSource = new InputSource(args[0]); //change to args[1] when you setup the option
 
         //Find the length of the file
@@ -27,6 +33,9 @@ public class Solver {
         //Everything else.
         String dimLine = newSource.readLine();
         String[] dimArray = dimLine.split("\\s+");
+        if (iamDebugging){
+        System.out.println(dimLine);
+        }
         if (dimArray.length != 2){
             System.err.println("You must input rows and columns in the first line of the input file.");
         }
@@ -49,21 +58,37 @@ public class Solver {
             System.exit(1);
         }
 
-        String s;
         int trayLine = 0;
-        int[][] tray = new int[lengthOfFile][4];
+        int[][] tray = new int[lengthOfFile-1][4];
         while (true){
             s = newSource.readLine ();
-            if (s == null) {
-                System.exit (0);
+            if (iamDebugging){
+            System.out.println(s);
             }
-            tray[trayLine] = makeBlock(s).getmyPos();
+            if (s == null) {
+                break;
+            }
+            tray[trayLine] = makeBlock(s, row, col, newSource.lineNumber()).getmyPos();
+            trayLine++;
         }
+        if (iamDebugging){
+            for (int i = 0; i < tray.length; i++ ){
+                int[] currentPos = tray[i];
+                for (int j = 0; j <4; j++){
+                   System.out.print(currentPos[j]);
+                }
+                System.out.println();
+            }
 
+        }
+        if (iamDebugging){
+            System.out.println("ROW: " + row + " COL: " +col);
+        }
+        Board board = new Board(row,col,tray);
     }
 
 
-    private static Block makeBlock (String x) {
+    private static Block makeBlock (String x, int maxRow, int maxCol, int line) {
         int rowUpper = 0;
         int colUpper = 0;
         int rowLower = 0;
@@ -79,12 +104,28 @@ public class Solver {
             colUpper = Integer.parseInt(posArray[1]);
             rowLower = Integer.parseInt(posArray[2]);
             colLower = Integer.parseInt(posArray[3]);
+            if (iamDebugging){
+            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
+            }
+            if ((rowUpper < 0 || rowUpper > maxRow) || (rowLower < 0 || rowLower > maxRow)){
+                System.err.println("Invalid row inputs at line " + line);
+            }
+            if ((colUpper < 0 || colUpper> maxCol) || (colLower < 0 || colLower > maxRow)){
+                System.err.println("Invalid column inputs at line " + line);
+            }
+            if (rowUpper > rowLower) {
+                System.err.println("The upper row must be less than or equal to the lower row. Line: "+ line);
+            }
+            if (colUpper < colLower) {
+                System.err.println("The upper column must be greater than or equal to the lower column. LIne: "+ line);
+            }
 
         } catch (NumberFormatException e){
-            System.err.println("Each line must con");
+            System.err.println("Each line must contain 4 numbers.");
             System.exit(1);
         }
-        return new Block(rowUpper,colUpper,rowLower,colLower);
-//        return new Block(null);
+        int[] rtn = {rowUpper,colUpper,rowLower,colLower};
+//        return rtn;
+        return new Block(rtn);
     }
 }
