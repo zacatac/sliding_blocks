@@ -2,8 +2,8 @@
 public class Board {
 
 	private int[][] tray =new int[256*256-1][4];
-	int rows, columns;
-	int count = 0;
+	private int rows, columns;
+	private int count = 0;
 	private boolean[][] whiteSpace;
 	
 	public Board(int rows, int columns) {
