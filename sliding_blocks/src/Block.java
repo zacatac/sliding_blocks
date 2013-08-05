@@ -1,22 +1,31 @@
 
 public class Block {
-  private int[] myPos = new int[4];
-	private String myString;
-	private int length, width;
+	private int[] position;
+	private int height, width; //height is num of rows, width is num of col
+	private int upLeftRow, upLeftCol, lowRightRow, lowRightCol; // elements in position array
 	
-	public Block(String x) {
-		myString = x;
-		String[] input = x.split("\\s+");
-		for (int i=0;i<4;i++) {
-			this.myPos[i] = Integer.parseInt(input[i]);
-		}
+	//initialize a block
+	public Block(int[] pos) {
+		position = pos;
+		upLeftRow = position[0];
+		upLeftCol = position[1];
+		lowRightRow = position[2];
+		lowRightCol = position[3];
+		height = lowRightRow - upLeftRow + 1;
+		width = lowRightCol - upLeftCol + 1;
 	}
 	
 	public int[] getmyPos(){
-		return myPos;
+		return position;
 	}
 	
-	public String toString() {
-		return myString;
+//	public String toString() {
+//		return myString;
+//	}
+	
+	
+	public static void main(String args[]){
+	
 	}
+	
 }
