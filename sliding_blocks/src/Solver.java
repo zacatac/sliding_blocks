@@ -5,6 +5,7 @@
  * Time: 10:09 AM
  * To change this template use File | Settings | File Templates.
  */
+// GITHUB TEST - CHERYL
 public class Solver {
     public static final boolean iamDebugging = false;
 
