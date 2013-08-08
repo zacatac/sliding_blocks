@@ -18,19 +18,6 @@ public class Solver {
         }
 
         InputSource newSource = new InputSource(args[0]); //change to args[1] when you setup the option
-
-        //Find the length of the file
-        InputSource lengthSource = new InputSource(args[0]); //change to args[1] when you setup the option
-        int lengthOfFile = 0;
-        String s;
-        while (true){
-            s = lengthSource.readLine();
-            if (s == null){
-                break;
-            }
-            lengthOfFile++;
-        }
-
         //Everything else.
         String dimLine = newSource.readLine();
         String[] dimArray = dimLine.split("\\s+");
@@ -49,47 +36,27 @@ public class Solver {
                 System.err.println("The row must be between 1 and 256 inclusive.");
                 System.exit(1);
             }
-            if (col < 1 || row > 256){
-                System.err.println("The row must be between 1 and 256 inclusive.");
-                System.exit(1);
-
-            }
         } catch (NumberFormatException e){
             System.err.println("The first line must contain two numbers.");
             System.exit(1);
         }
-
-        int trayLine = 0;
-        int[][] tray = new int[lengthOfFile-1][4];
         while (true){
-            s = newSource.readLine ();
+            String s = newSource.readLine ();
             if (iamDebugging){
             System.out.println(s);
             }
             if (s == null) {
                 break;
             }
-            tray[trayLine] = makeBlock(s, row, col, newSource.lineNumber()).getmyPos();
-            trayLine++;
+            Board board = new Board();
+            makeBlock(board, s, row, col, newSource.lineNumber());
+            System.out.print(board);
         }
-        if (iamDebugging){
-            for (int i = 0; i < tray.length; i++ ){
-                int[] currentPos = tray[i];
-                for (int j = 0; j <4; j++){
-                   System.out.print(currentPos[j]);
-                }
-                System.out.println();
-            }
-
-        }
-        if (iamDebugging){
-            System.out.println("ROW: " + row + " COL: " +col);
-        }
-        Board board = new Board(row,col,tray);
+        
     }
 
 
-    private static Block makeBlock (String x, int maxRow, int maxCol, int line) {
+    private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line) {
         int rowUpper = 0;
         int colUpper = 0;
         int rowLower = 0;
@@ -125,8 +92,12 @@ public class Solver {
             System.err.println("Each line must contain 4 numbers.");
             System.exit(1);
         }
-        int[] rtn = {rowUpper,colUpper,rowLower,colLower};
-//        return rtn;
-        return new Block(rtn);
+        int[] dimentions = new int[2];
+        dimentions[0] = rowLower - rowUpper + 1;
+        dimentions[1] = colLower - colUpper + 1;
+        int[] upperLeft = new int[2];
+        upperLeft[0] = rowUpper;
+        upperLeft[1] = colUpper;
+        b.addBlock(dimentions, upperLeft);
     }
 }
