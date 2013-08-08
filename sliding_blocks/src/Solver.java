@@ -5,6 +5,7 @@
  * Time: 10:09 AM
  * To change this template use File | Settings | File Templates.
  */
+// GITHUB TEST - CHERYL
 public class Solver {
     public static final boolean iamDebugging = false;
 
@@ -116,7 +117,7 @@ public class Solver {
             if (rowUpper > rowLower) {
                 System.err.println("The upper row must be less than or equal to the lower row. Line: "+ line);
             }
-            if (colUpper < colLower) {
+            if (colUpper > colLower) {
                 System.err.println("The upper column must be greater than or equal to the lower column. LIne: "+ line);
             }
 

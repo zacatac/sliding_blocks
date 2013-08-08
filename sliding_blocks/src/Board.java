@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.HashSet;
 
@@ -22,6 +23,28 @@ public class Board {
     // All blocks are added at the start in the constructor, which accepts
     // a full tray
     /*
+=======
+public class Board {
+
+	private int[][] tray =new int[256*256-1][4];
+	private int rows, columns;
+	private int count = 0;
+	private boolean[][] whiteSpace;
+	
+	public Board(int rows, int columns, int[][] tray) {
+		whiteSpace = new boolean[rows][columns];
+		int[] init = new int[4];
+		init[0] = 0;
+		init[1] = 0;
+		init[2] = rows-1;
+		init[3] = columns-1;
+		this.updateSpaces(init, true);
+	}
+	public Board(int rows, int columns, int[][] tray, boolean[][] whiteSpace) {
+		whiteSpace = new boolean[rows][columns];
+	}
+	
+>>>>>>> 4141565681ab14b855f883e3e602936f1c44e462
 	//add new Block, whitespaces are true when they are unoccupied
 	public void addBlock(Block b){
 		this.updateSpaces(b.getmyPos(), false);

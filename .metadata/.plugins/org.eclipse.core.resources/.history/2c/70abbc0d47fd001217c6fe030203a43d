@@ -1,0 +1,26 @@
+
+public class Board {
+
+	private int[][] tray;
+	int[] dimension;
+	
+	
+	public Board(String x) {
+		String[] input = x.split("\\s+");
+		for (int i=0;i<2;i++) {
+			dimension[i] = Integer.parseInt(input[i]);
+		}
+		tray = new int[dimension[0]][dimension[1]];	
+	}
+	
+	
+	//add new Block
+	public void addBlock(Block b){
+		b.myPos
+	}
+	
+	//a
+	public static void main(String args[]){
+		
+	}
+}
