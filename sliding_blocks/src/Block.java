@@ -18,12 +18,8 @@ public class Block {
 	public int[] getmyPos(){
 		return position;
 	}
-	
-//	public String toString() {
-//		return myString;
-//	}
-	
-	
+
+
 	public static void main(String args[]){
 	
 	}
