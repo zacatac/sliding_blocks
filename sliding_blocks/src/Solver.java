@@ -51,11 +51,11 @@ public class Solver {
             }
             makeBlock(board, s, row, col, newSource.lineNumber());
         }
-        System.out.print(board);
+        System.out.println(board);
         
     }
 
-
+    //"makes" and adds a block to a board
     private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line) {
         int rowUpper = 0;
         int colUpper = 0;
