@@ -40,6 +40,7 @@ public class Solver {
             System.err.println("The first line must contain two numbers.");
             System.exit(1);
         }
+        Board board = new Board();
         while (true){
             String s = newSource.readLine ();
             if (iamDebugging){
@@ -48,10 +49,9 @@ public class Solver {
             if (s == null) {
                 break;
             }
-            Board board = new Board();
             makeBlock(board, s, row, col, newSource.lineNumber());
-            System.out.print(board);
         }
+        System.out.print(board);
         
     }
 
@@ -92,12 +92,13 @@ public class Solver {
             System.err.println("Each line must contain 4 numbers.");
             System.exit(1);
         }
-        int[] dimentions = new int[2];
-        dimentions[0] = rowLower - rowUpper + 1;
-        dimentions[1] = colLower - colUpper + 1;
+        String dimentions = "";
+        dimentions += rowLower - rowUpper + 1;
+        dimentions += colLower - colUpper + 1;
         int[] upperLeft = new int[2];
         upperLeft[0] = rowUpper;
         upperLeft[1] = colUpper;
         b.addBlock(dimentions, upperLeft);
+        
     }
 }
