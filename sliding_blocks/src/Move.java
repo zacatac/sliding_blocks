@@ -24,10 +24,12 @@ public class Move implements Comparable{
     private int[] info = new int[7];
     private static Board goalBoard;
     private int myScore;
+    public Move parentMove;
 
     public Move(Board goalBoard){
         Move.goalBoard = goalBoard;
     }
+
 
     public Move(int previousRow,     //0
                 int previousColumn,  //1
@@ -35,7 +37,8 @@ public class Move implements Comparable{
                 int nextColumn,      //3
                 int dimRows,         //4
                 int dimColumns,      //5
-                int depth){          //6
+                int depth,           //6
+                Move parentMove){
         this.info[0] = previousRow;
         this.info[1] = previousColumn;
         this.info[2] = nextRow;
@@ -44,16 +47,39 @@ public class Move implements Comparable{
         this.info[5] = dimColumns;
         this.info[6] = depth;
         this.myScore = calculateScore(this.info);
+        this.parentMove = parentMove;
     }
 
+    public Move(int previousRow,     //0
+                int previousColumn,  //1
+                int nextRow,         //2
+                int nextColumn,      //3
+                int dimRows,         //4
+                int dimColumns,      //5
+                int depth            //6
+                    ){
+        this(previousRow,
+                previousColumn,
+                nextRow,
+                nextColumn,
+                dimRows,
+                dimColumns,
+                depth,
+                null);
+    }
 
-    public Move(int[] alreadyFormed){
+    public Move(int[] alreadyFormed, Move parentMove){
         this.info = alreadyFormed;
         this.myScore = calculateScore(this.info);
+        this.parentMove = parentMove;
+    }
+
+    public Move(int[] alreadyFormed){
+        this(alreadyFormed,null);
     }
 
 
-    private int calculateScore(int[] info) {
+    public int calculateScore(int[] info) {
         return 0;
     }
 
@@ -76,7 +102,7 @@ public class Move implements Comparable{
         try {
             specified = (Move)o;
         } catch(ClassCastException c){
-            System.err.println("You are not comparing two Move objects, " +
+            System.err.println("COMPARETO: You are not comparing two Move objects, " +
                     "\n are you trying to break something?");
             System.exit(1);
         }
@@ -88,5 +114,41 @@ public class Move implements Comparable{
         } else {
             return 0;
         }
+    }
+
+    @Override
+    public boolean equals(Object o){
+        Move specifiedMove = null;
+        try{
+            specifiedMove = (Move)o;
+        } catch(ClassCastException c){
+            System.err.println("EQUALS: You are not comparing two Move objects, " +
+                    "\n are you trying to break something?");
+            System.exit(1);
+        }
+        int[] myInfo  = this.getInfo();
+        int[] specified = specifiedMove.getInfo();
+        boolean rtn = true;
+        for (int i = 0; i < 7; i++) {
+            if (myInfo[i] != specified[i]){
+                rtn = false;
+            }
+        }
+        return rtn;
+    }
+
+    @Override
+    public String toString(){
+        String s = "[";
+        s += info[0] + " ";
+        s += info[1] + " ";
+        s += info[2] + " ";
+        s += info[3] + " ";
+        s += info[4] + " ";
+        s += info[5] + " ";
+        s += info[6];
+        s += "]";
+        return s;
+
     }
 }

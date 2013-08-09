@@ -9,12 +9,8 @@ import java.util.*;
  */
 // GITHUB TEST - CHERYL
 public class Solver {
-    public static final boolean iamDebugging = false;
-
-
-
-
-    private static Stack<Move> moveList;
+    public static final boolean iamDebugging = true;
+    private static Stack<Move> moveStack;
     private static PriorityQueue<Move> moveQueue;
 
     public static void main(String[] args) {
@@ -27,9 +23,9 @@ public class Solver {
         //Everything else.
         String dimLine = newSource.readLine();
         String[] dimArray = dimLine.split("\\s+");
-        if (iamDebugging){
-        System.out.println(dimLine);
-        }
+//        if (iamDebugging){
+//        System.out.println(dimLine);
+//        }
         if (dimArray.length != 2){
             System.err.println("You must input rows and columns in the first line of the input file.");
         }
@@ -49,29 +45,35 @@ public class Solver {
         Board board = new Board(row,col);
         while (true){
             String s = newSource.readLine ();
-            if (iamDebugging){
-            System.out.println(s);
-            }
+//            if (iamDebugging){
+//            System.out.println(s);
+//            }
             if (s == null) {
                 break;
             }
-            makeBlock(board, s, row, col, newSource.lineNumber());
+            makeBlock(board, s, row, col, newSource.lineNumber(),true);
         }
 
-        InputSource goalSource = new InputSource(args[0]); //change to args[1] when you setup the option
+        InputSource goalSource = new InputSource(args[1]); //change to args[1] when you setup the option
         //Everything else.
         Board goalBoard= new Board();
         while (true){
             String s = goalSource.readLine ();
-            if (iamDebugging){
-                System.out.println(s);
-            }
+//            if (iamDebugging){
+//                System.out.println(s);
+//            }
             if (s == null) {
                 break;
             }
-            makeBlock(goalBoard, s, row, col, goalSource.lineNumber());
+            makeBlock(goalBoard, s, row, col, goalSource.lineNumber(),false);
         }
 
+        if (iamDebugging){
+            System.out.println("INITIAL BOARD: ");
+            System.out.println(board);
+            System.out.println("GOAL BOARD: ");
+            System.out.println(goalBoard);
+        }
         Move firstMove = new Move(goalBoard);
 
         solveTheDamnPuzzle(board,goalBoard);
@@ -81,18 +83,23 @@ public class Solver {
 
     public static void solveTheDamnPuzzle (Board board, Board goalBoard){
         int depth = 1;
+
         ArrayList<Move> firstAvailableMoves = board.findMoves(depth);
         for (Move move:firstAvailableMoves){
+
             moveQueue.add(move);
         }
 
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
 
+            if (iamDebugging){
+                System.out.println("BEST MOVE: " + bestMove);
+            }
             doMove(board,bestMove);
 
+            moveStack.push(bestMove);
 
-            moveList.push(bestMove);
 
             //Winning case
             if (board.equals(goalBoard)) {
@@ -100,8 +107,8 @@ public class Solver {
                         "a classic puzzle by having a computer solve it for you \n" +
                         "here's your prize...\n");
                 ArrayList<Move> movesBackward = new ArrayList<Move>();
-                while (!moveList.isEmpty()) {
-                    movesBackward.add(0,moveList.pop());
+                while (!moveStack.isEmpty()) {
+                    movesBackward.add(0, moveStack.pop());
                 }
                 for (Move move:movesBackward){
                 int[] info = move.getInfo();
@@ -119,7 +126,7 @@ public class Solver {
 
 
     //"makes" and adds a block to a board
-    private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line) {
+    private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line,boolean onOff) {
         int rowUpper = 0;
         int colUpper = 0;
         int rowLower = 0;
@@ -135,9 +142,9 @@ public class Solver {
             colUpper = Integer.parseInt(posArray[1]);
             rowLower = Integer.parseInt(posArray[2]);
             colLower = Integer.parseInt(posArray[3]);
-            if (iamDebugging){
-            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
-            }
+//            if (iamDebugging){
+//            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
+//            }
             if ((rowUpper < 0 || rowUpper > maxRow) || (rowLower < 0 || rowLower > maxRow)){
                 System.err.println("Invalid row inputs at line " + line);
             }
@@ -145,7 +152,7 @@ public class Solver {
                 System.err.println("Invalid column inputs at line " + line);
             }
             if (rowUpper > rowLower) {
-                System.err.println("The upper row must be less than or equal to the lower row. Line: "+ line);
+                System.err.println("The upper row must be less than or e    qual to the lower row. Line: "+ line);
             }
             if (colUpper > colLower) {
                 System.err.println("The upper column must be greater than or equal to the lower column. LIne: "+ line);
@@ -161,7 +168,7 @@ public class Solver {
         int[] upperLeft = new int[2];
         upperLeft[0] = rowUpper;
         upperLeft[1] = colUpper;
-        b.addBlock(dimentions, upperLeft,true);
+        b.addBlock(dimentions, upperLeft,onOff);
         
     }
 
@@ -175,27 +182,63 @@ public class Solver {
 
         //This while loop will bring you back to the depth
         // at which you can complete the move you were given.
-        Move topMove = moveList.peek();
-        while (depth <= topMove.getInfo()[6]){
-            topMove = moveList.pop();
-            moveQueue.add(topMove); //YOU MUST ADD THIS MOVE BACK TO THE QUEUE!
-            info = topMove.getInfo();
-            blockDimension = "" + info[4] + info[5];
-
-            upperLeftPrevious = new int[2];
-            upperLeftPrevious[0] = info[0];
-            upperLeftPrevious[1] = info[1];
-
-            upperLeftNext = new int[2];
-            upperLeftNext[0] = info[2];
-            upperLeftNext[1] = info[3];
-
-            board.removeBlock(blockDimension,upperLeftNext,true);
-            board.addBlock(blockDimension,upperLeftPrevious,true);
-
-            topMove = moveList.peek();
+        Move topMove = moveStack.peek();
+        while (!moveStack.isEmpty() || depth >= topMove.getInfo()[6]){
+            undoMove(board,moveStack.pop());
+            topMove = moveStack.peek();
         }
-        board.removeBlock(blockDimension,upperLeftPrevious,true);
-        board.addBlock(blockDimension,upperLeftNext,true);
+        Move currentMove = moveStack.peek();
+
+        if (currentMove.equals(move.parentMove)){
+            board.removeBlock(blockDimension,upperLeftPrevious,true);
+            board.addBlock(blockDimension,upperLeftNext,true);
+        } else {
+            Move commonAncsestor  = moveStack.pop();
+            Move bestMoveAncestor = move.parentMove;
+            Stack<Move> travelBackDown = new Stack<Move>();
+            while (!moveStack.isEmpty() && bestMoveAncestor != null){
+                moveQueue.add(commonAncsestor);
+                commonAncsestor = moveStack.pop();
+
+                undoMove(board,commonAncsestor);
+
+                travelBackDown.push(bestMoveAncestor);
+                bestMoveAncestor = bestMoveAncestor.parentMove;
+
+                if (commonAncsestor.equals(bestMoveAncestor)){
+                    while (!travelBackDown.isEmpty()){
+                        Move movingMove = travelBackDown.pop();
+                        moveStack.push(movingMove);
+                        doMove(board, movingMove);
+                    }
+                } else {
+                    continue;
+                }
+
+            }
+        }
+    }
+
+    private static void undoMove(Board board, Move move){
+        //Remove the children from the queue here.
+        int[] info;
+        String blockDimension;
+        int[] upperLeftPrevious;
+        int[] upperLeftNext;
+
+        moveQueue.add(move); //YOU MUST ADD THIS MOVE BACK TO THE QUEUE!
+        info = move.getInfo();
+        blockDimension = "" + info[4] + info[5];
+
+        upperLeftPrevious = new int[2];
+        upperLeftPrevious[0] = info[0];
+        upperLeftPrevious[1] = info[1];
+
+        upperLeftNext = new int[2];
+        upperLeftNext[0] = info[2];
+        upperLeftNext[1] = info[3];
+
+        board.removeBlock(blockDimension,upperLeftNext,true);
+        board.addBlock(blockDimension, upperLeftPrevious, true);
     }
 }
