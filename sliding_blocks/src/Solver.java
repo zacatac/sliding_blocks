@@ -1,3 +1,5 @@
+import java.util.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: zrfield
@@ -10,6 +12,10 @@ public class Solver {
     public static final boolean iamDebugging = false;
 
 
+
+
+    private static Stack<Move> moveList;
+    private static PriorityQueue<Move> moveQueue;
 
     public static void main(String[] args) {
         if (args.length == 0){
@@ -40,7 +46,7 @@ public class Solver {
             System.err.println("The first line must contain two numbers.");
             System.exit(1);
         }
-        Board board = new Board();
+        Board board = new Board(row,col);
         while (true){
             String s = newSource.readLine ();
             if (iamDebugging){
@@ -51,9 +57,66 @@ public class Solver {
             }
             makeBlock(board, s, row, col, newSource.lineNumber());
         }
-        System.out.println(board);
+
+        InputSource goalSource = new InputSource(args[0]); //change to args[1] when you setup the option
+        //Everything else.
+        Board goalBoard= new Board();
+        while (true){
+            String s = goalSource.readLine ();
+            if (iamDebugging){
+                System.out.println(s);
+            }
+            if (s == null) {
+                break;
+            }
+            makeBlock(goalBoard, s, row, col, goalSource.lineNumber());
+        }
+
+        Move firstMove = new Move(goalBoard);
+
+        solveTheDamnPuzzle(board,goalBoard);
+
         
     }
+
+    public static void solveTheDamnPuzzle (Board board, Board goalBoard){
+        int depth = 1;
+        ArrayList<Move> firstAvailableMoves = board.findMoves(depth);
+        for (Move move:firstAvailableMoves){
+            moveQueue.add(move);
+        }
+
+        while (!moveQueue.isEmpty()){
+            Move bestMove = moveQueue.poll();
+
+            doMove(board,bestMove);
+
+
+            moveList.push(bestMove);
+
+            //Winning case
+            if (board.equals(goalBoard)) {
+                System.out.println("CONGRATULATIONS! You took all the fun out of \n" +
+                        "a classic puzzle by having a computer solve it for you \n" +
+                        "here's your prize...\n");
+                ArrayList<Move> movesBackward = new ArrayList<Move>();
+                while (!moveList.isEmpty()) {
+                    movesBackward.add(0,moveList.pop());
+                }
+                for (Move move:movesBackward){
+                int[] info = move.getInfo();
+                System.out.println("[ ("+ info[0] + "," + info[1]+") ("+ info[2] + "," + info[3]+") ]");
+                }
+            }
+            depth = bestMove.getInfo()[6]++;
+            ArrayList<Move> nextAvailableMoves = board.findMoves(depth);
+            for (Move move: nextAvailableMoves){
+                moveQueue.add(move);
+            }
+        }
+        System.out.println("You're shit outta luck...");
+    }
+
 
     //"makes" and adds a block to a board
     private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line) {
@@ -98,7 +161,41 @@ public class Solver {
         int[] upperLeft = new int[2];
         upperLeft[0] = rowUpper;
         upperLeft[1] = colUpper;
-        b.addBlock(dimentions, upperLeft);
+        b.addBlock(dimentions, upperLeft,true);
         
+    }
+
+    //Completes an actual move and updates the move.
+    private static void doMove(Board board, Move move){
+        int[] info = move.getInfo();
+        int depth = info[6];
+        String blockDimension = "" + info[4] + info[5];
+        int[] upperLeftPrevious = {info[0],info[1]};
+        int[] upperLeftNext = {info[2],info[3]};
+
+        //This while loop will bring you back to the depth
+        // at which you can complete the move you were given.
+        Move topMove = moveList.peek();
+        while (depth <= topMove.getInfo()[6]){
+            topMove = moveList.pop();
+            moveQueue.add(topMove); //YOU MUST ADD THIS MOVE BACK TO THE QUEUE!
+            info = topMove.getInfo();
+            blockDimension = "" + info[4] + info[5];
+
+            upperLeftPrevious = new int[2];
+            upperLeftPrevious[0] = info[0];
+            upperLeftPrevious[1] = info[1];
+
+            upperLeftNext = new int[2];
+            upperLeftNext[0] = info[2];
+            upperLeftNext[1] = info[3];
+
+            board.removeBlock(blockDimension,upperLeftNext,true);
+            board.addBlock(blockDimension,upperLeftPrevious,true);
+
+            topMove = moveList.peek();
+        }
+        board.removeBlock(blockDimension,upperLeftPrevious,true);
+        board.addBlock(blockDimension,upperLeftNext,true);
     }
 }
