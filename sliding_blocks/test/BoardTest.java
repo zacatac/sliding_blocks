@@ -72,4 +72,16 @@ public class BoardTest extends TestCase{
 		System.out.println(board4);
 	}
 	
+		System.out.println("~~~Remove block test~~~ Can we remove if no block to remove");
+		Board board5 = new Board(5,5);
+		int[] array10 = {1,1};
+		
+		try{
+		board4.removeBlock("11", array10, true);
+		System.out.println("not supposed to see this");
+		}
+		catch (IllegalArgumentException e) {
+		System.out.println(board5);
+		}
+	
 }
