@@ -9,9 +9,23 @@ import java.util.*;
  */
 // GITHUB TEST - CHERYL
 public class Solver {
-    public static final boolean iamDebugging = true;
+    public static final boolean iamDebugging = false;
     private static Stack<Move> moveStack;
     private static PriorityQueue<Move> moveQueue;
+
+
+    public Stack<Move> getMoveStack(){
+        return moveStack;
+    }
+    public static void setMoveStack(Stack<Move> myStack){
+        moveStack = myStack;
+    }
+    public static PriorityQueue<Move> getMoveQueue() {
+        return moveQueue;
+    }
+    public static void setMoveQueue(PriorityQueue<Move> myQueue){
+        moveQueue = myQueue;
+    }
 
     public static void main(String[] args) {
         if (args.length == 0){
@@ -126,41 +140,43 @@ public class Solver {
 
 
     //"makes" and adds a block to a board
-    private static void makeBlock (Board b, String x, int maxRow, int maxCol, int line,boolean onOff) {
+    public static void makeBlock (Board b, String x, int maxRow, int maxCol, int line,boolean onOff) {
         int rowUpper = 0;
         int colUpper = 0;
         int rowLower = 0;
         int colLower = 0;
 
+        if (x == null){
+            throw new IllegalArgumentException("You must pass in a string");
+        }
         String[] posArray = x.split("\\s+");
         if (posArray.length != 4){
-            System.err.println("You must input the row and column of the top right \n " +
-                    "and bottom left of each block");
+            throw new IllegalArgumentException("You must input the row and column of the top right +\n" +
+                                       "and bottom left of each block");
         }
         try {
             rowUpper = Integer.parseInt(posArray[0]);
             colUpper = Integer.parseInt(posArray[1]);
             rowLower = Integer.parseInt(posArray[2]);
             colLower = Integer.parseInt(posArray[3]);
-//            if (iamDebugging){
-//            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
-//            }
+            if (iamDebugging){
+            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
+            }
             if ((rowUpper < 0 || rowUpper > maxRow) || (rowLower < 0 || rowLower > maxRow)){
-                System.err.println("Invalid row inputs at line " + line);
+                throw new IllegalArgumentException("Invalid row inputs at line " + line);
             }
             if ((colUpper < 0 || colUpper> maxCol) || (colLower < 0 || colLower > maxRow)){
-                System.err.println("Invalid column inputs at line " + line);
+                throw new IllegalArgumentException("Invalid column inputs at line " + line);
             }
             if (rowUpper > rowLower) {
-                System.err.println("The upper row must be less than or e    qual to the lower row. Line: "+ line);
+                throw  new IllegalArgumentException("The upper row must be less than or equal to the lower row. Line: "+ line);
             }
             if (colUpper > colLower) {
-                System.err.println("The upper column must be greater than or equal to the lower column. LIne: "+ line);
+                throw new IllegalArgumentException("The upper column must be greater than or equal to the lower column. LIne: "+ line);
             }
 
         } catch (NumberFormatException e){
-            System.err.println("Each line must contain 4 numbers.");
-            System.exit(1);
+            throw new IllegalArgumentException("Each line must contain 4 numbers.");
         }
         String dimentions = "";
         dimentions += rowLower - rowUpper + 1;
@@ -173,7 +189,7 @@ public class Solver {
     }
 
     //Completes an actual move and updates the move.
-    private static void doMove(Board board, Move move){
+    public static void doMove(Board board, Move move){
         int[] info = move.getInfo();
         int depth = info[6];
         String blockDimension = "" + info[4] + info[5];
@@ -182,14 +198,16 @@ public class Solver {
 
         //This while loop will bring you back to the depth
         // at which you can complete the move you were given.
-        Move topMove = moveStack.peek();
-        while (!moveStack.isEmpty() || depth >= topMove.getInfo()[6]){
-            undoMove(board,moveStack.pop());
-            topMove = moveStack.peek();
+        Move currentMove = null;
+        if (!moveStack.isEmpty()){
+            Move topMove = moveStack.peek();
+            while (!moveStack.isEmpty() || depth >= topMove.getInfo()[6]){
+                undoMove(board,moveStack.pop());
+                topMove = moveStack.peek();
+            }
+            currentMove = moveStack.peek();
         }
-        Move currentMove = moveStack.peek();
-
-        if (currentMove.equals(move.parentMove)){
+        if (moveStack.isEmpty() || currentMove.equals(move.parentMove)){
             board.removeBlock(blockDimension,upperLeftPrevious,true);
             board.addBlock(blockDimension,upperLeftNext,true);
         } else {
@@ -219,7 +237,7 @@ public class Solver {
         }
     }
 
-    private static void undoMove(Board board, Move move){
+    public static void undoMove(Board board, Move move){
         //Remove the children from the queue here.
         int[] info;
         String blockDimension;
