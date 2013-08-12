@@ -218,12 +218,14 @@ public class Board{
         //checking for bottom move
         if (block[0] + dimensions[0] < row){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
-        		if (notEmpty[block[0]+1][i]){
+        		if (notEmpty[block[0]+dimensions[0]][i]){
                     moveAvailable[1] = false;
+                    System.out.println("CHECK BOTTOM (A)");
                 }
         	}
         } else {
             moveAvailable[1]  = false;
+            System.out.println("CHECK BOTTOM(B)");
         }
         
         //checking for left move
@@ -240,7 +242,7 @@ public class Board{
         //checking for right move
         if (block[1] + dimensions[1] < col){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-                if (notEmpty[i][block[1]+1]){
+                if (notEmpty[i][block[1]+dimensions[1]]){
                 	moveAvailable[3] = false;
                 }
         	}
