@@ -35,19 +35,24 @@ public class BoardTest extends TestCase{
 		Board b3 = new Board(2,2);
 		b3.addBlock("2 2", array, true);
 		boolean[][] notEmpty = b3.getNotEmpty();
-//        System.out.print("[");
-//        for (int i  = 0; i < notEmpty.length; i++){
-//            System.out.print("[");
-//            for (int j  = 0; j < notEmpty[0].length; j++){
-//                System.out.print(notEmpty[i][j] + " ");
-//            }
-//            if (i == notEmpty.length-1){
-//                System.out.print("]]" + "\n");
-//            }  else{
-//                System.out.print("]," + "\n");
-//            }
-//
-//        }
+		
+// PRINT METHOD FOR WHITESPACES
+	// System.out.println("WhiteSpaces");
+	// System.out.print("[");
+ //       for (int i  = 0; i < b.getNotEmpty().length; i++){
+ //           System.out.print("[");
+ //           for (int j  = 0; j < b.getNotEmpty()[0].length; j++){
+ //               System.out.print(b.getNotEmpty()[i][j] + " ");
+ //           }
+ //           if (i == b.getNotEmpty().length-1){
+ //               System.out.print("]]" + "\n");
+ //           }  else{
+ //               System.out.print("]," + "\n");
+ //           }
+
+ //       }
+ 
+ 
         System.out.println();
 		assertTrue(b3.getNotEmpty()[0][0]);
 		assertTrue(b3.getNotEmpty()[0][1]);
