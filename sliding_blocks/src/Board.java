@@ -196,38 +196,38 @@ public class Board{
     }
 
 
-    public boolean[] isFreeToMove(int[] dimensions,int[] block) {
+     public boolean[] isFreeToMove(int[] dimensions,int[] block) {
         boolean[] moveAvailable = new boolean[4];
-        moveAvailable[0] = true;
-        moveAvailable[1] = true;
-        moveAvailable[2] = true;
-        moveAvailable[3] = true;
+        moveAvailable[0] = true; //top
+        moveAvailable[1] = true; //bottom
+        moveAvailable[2] = true; //left
+        moveAvailable[3] = true; //right
 
         //checking for top move - block[1] is num of row
-        if (block[0] - 1 >= 0){
+        if (block[0] > 0){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
         		if (notEmpty[block[0]-1][i]){
                     moveAvailable[0] = false;
                 }
         	}
 
-        }  else{
+        } else{
             moveAvailable[0] = false;
         }
-
+        
         //checking for bottom move
-        if (block[0] + dimensions[0] <= row){
+        if (block[0] + dimensions[0] < row){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
         		if (notEmpty[block[0]+1][i]){
-                    moveAvailable[0] = false;
+                    moveAvailable[1] = false;
                 }
         	}
         } else {
             moveAvailable[1]  = false;
         }
-
+        
         //checking for left move
-        if (block[1] - 1 >= 0){
+        if (block[1] > 0){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
         		if (notEmpty[i][block[1]-1]){
                   moveAvailable[2] = false;
@@ -238,18 +238,18 @@ public class Board{
         }
 
         //checking for right move
-        if (block[1] + dimensions[1] <= col){
+        if (block[1] + dimensions[1] < col){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-                if (notEmpty[i][block[1]+dimensions[1]+1]){
+                if (notEmpty[i][block[1]+1]){
                 	moveAvailable[3] = false;
                 }
         	}
         } else {
             moveAvailable[3] = false;
         }
-	    return moveAvailable;
-	}
-
+//        System.out.println(Arrays.toString(moveAvailable));
+	return moveAvailable;
+    }
     //CHANGED KEY TO BE String "row + " " + col"
     public static int[] keyToIntArray(String key){
     	String[] rtnKey = key.split("\\s+");
