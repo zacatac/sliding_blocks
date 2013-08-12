@@ -28,22 +28,6 @@ public class Board{
     public void addBlock(String blockdimension, int[] upperleft, boolean iWantToChangeNotEmpty){
     	int[] dimensions = new int[2];
     	dimensions = keyToIntArray(blockdimension);
-    	if (upperleft[0] < 0 || upperleft[0] + dimensions[0] > row +1 || upperleft[1] < 0 
-    			|| upperleft[1] > col +1) {
-    		System.err.println("Cannot add Block on top of an existing block");
-    		System.exit(1);
-    	}
-    	
-    	
-    	//This for loop is supposed to catch adding overlapping blocks
-    	//either throw a new illegal argument exception 
-    	for (int i = upperleft[0]; i < upperleft[0] + dimensions[0]; i++){
-    		for (int j = upperleft[1]; i < upperleft[1] + dimensions[1]; j++){
-    			if (notEmpty[i][j] == true) { // THIS LINE IS BUGGY
-    				throw new ArrayIndexOutOfBoundsException("Cannot have overlapping blocks");
-    			}
-    		}
-    	}
     	if (!board.containsKey(blockdimension)) {
 			ArrayList<int[]> entriesbydimention = new ArrayList<int[]>();
 			entriesbydimention.add(upperleft);
@@ -64,14 +48,12 @@ public class Board{
 							entriesbydimention.add(upperleft);
 							break;
 						}
-						continue;
 					}
 				} else {
 					if (i == entriesbydimention.size() - 1) {
 						entriesbydimention.add(upperleft);
 						break;
 					}
-					continue;
 				}
 			}
 		}
@@ -82,21 +64,6 @@ public class Board{
 
     //removes a block from the board
     public void removeBlock(String blockdimension, int[] upperleft,boolean iWantToChangeNotEmpty) {
-    	int[] dimensions = new int[2];
-    	dimensions = keyToIntArray(blockdimension);
-    	if (upperleft[0] < 0 || upperleft[0] + dimensions[0] > row +1 || upperleft[1] < 0 
-    			|| upperleft[1] > col +1) {
-    		throw new ArrayIndexOutOfBoundsException("cannot remove block from outside board");
-    	}
-    	for (int i = upperleft[0]; i < upperleft[0] + dimensions[0]; i++){
-    		for (int j = upperleft[1]; i < upperleft[1] + dimensions[1]; j++){
-    			if (notEmpty[i][j] == false){
-    				System.err.println("Cannot remove a block that does not exist");
-    				System.exit(1);
-    			}
-    		}
-    	}
-
     	ArrayList<int[]> blocks = board.get(blockdimension);
     	if (blocks == null) {
     		throw new NullPointerException("no blocks to remove");
@@ -165,26 +132,26 @@ public class Board{
                 boolean[] notFree = isFreeToMove(dimensions,block);
 
                 if (!notFree[0]){
-                    if (thisMoveWorked(block,key)){
+                    if (thisMoveWorked(block,key,true,false)){
                         Move move = new Move(block[0],block[1],block[0]-1,block[1],dimensions[0],dimensions[1],depth);
                         moves.add(move);
                     }
                 }
                 if (!notFree[1]){
-                    if(thisMoveWorked(block,key)){
+                    if(thisMoveWorked(block,key,true,true)){
                         Move move = new Move(block[0],block[1],block[0]+1,block[1],dimensions[0],dimensions[1],depth);
                         moves.add(move);
                     }
                 }
                 if (!notFree[2]){
-                    if(thisMoveWorked(block,key)){
+                    if(thisMoveWorked(block,key,false,false)){
                         Move move = new Move(block[0],block[1],block[0],block[1]-1,dimensions[0],dimensions[1],depth);
                         moves.add(move);
                     }
 
                 }
                 if (!notFree[3]){
-                    if(thisMoveWorked(block,key)){
+                    if(thisMoveWorked(block,key,false,true)){
                         Move move = new Move(block[0],block[1],block[0],block[1]+1,dimensions[0],dimensions[1],depth);
                         moves.add(move);
                     }
@@ -195,9 +162,26 @@ public class Board{
         return moves;
     }
 
-    private boolean thisMoveWorked(int[] block,String key){
+    private boolean thisMoveWorked(int[] block,String key, boolean isARow, boolean isIncereasing){
         boolean rtn = false;
-        int[] newBlock = {block[0]-1,block[1]};
+        int[] newBlock = new int[2];
+        String[] dimensions = key.split(" ");
+        if (isARow && isIncereasing){
+            newBlock[0] = block[0]+1;
+            newBlock[1] = block[1];
+        } else if (isARow && !isIncereasing){
+            newBlock[0] = block[0]-1;
+            newBlock[1] = block[1];
+        } else if (!isARow && isIncereasing){
+            newBlock[0] = block[0];
+            newBlock[1] = block[1]+1;
+        } else if (!isARow && !isIncereasing){
+            newBlock[0] = block[0];
+            newBlock[1] = block[1]-1;
+        }
+
+
+//        int[] newBlock = {block[0]-1,block[1]};
 
         this.removeBlock(key,block,false);
         this.addBlock(key,newBlock,false);
@@ -263,8 +247,11 @@ public class Board{
         
     
     //CHANGED KEY TO BE String "row + " " + col"
-    private int[] keyToIntArray(String key){
+    public static int[] keyToIntArray(String key){
     	String[] rtnKey = key.split("\\s+");
+        if (rtnKey.length != 2){
+            System.out.println("Internal inconsistency in dimension keys");
+        }
     	int[] rtn = new int[2];
         rtn[0] = Integer.parseInt(rtnKey[0]);
         rtn[1] = Integer.parseInt(rtnKey[1]);
