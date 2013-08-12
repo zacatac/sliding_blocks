@@ -76,7 +76,9 @@ public class Board{
     		throw new NullPointerException("no blocks to remove");
     	}
     	blocks.remove(upperleft);
-        
+        if (blocks.isEmpty()){
+            board.remove(blockdimension);
+        }
         if (iWantToChangeNotEmpty){
             changeWhiteSpaces(blockdimension,upperleft,false);
         }
@@ -158,26 +160,22 @@ public class Board{
         return moves;
     }
 
-    private boolean thisMoveWorked(int[] block,String key, boolean isARow, boolean isIncereasing){
+    private boolean thisMoveWorked(int[] block,String key, boolean isARow, boolean isIncreasing){
         boolean rtn = false;
         int[] newBlock = new int[2];
-        String[] dimensions = key.split(" ");
-        if (isARow && isIncereasing){
+        if (isARow && isIncreasing){
             newBlock[0] = block[0]+1;
             newBlock[1] = block[1];
-        } else if (isARow && !isIncereasing){
+        } else if (isARow && !isIncreasing){
             newBlock[0] = block[0]-1;
             newBlock[1] = block[1];
-        } else if (!isARow && isIncereasing){
+        } else if (!isARow && isIncreasing){
             newBlock[0] = block[0];
             newBlock[1] = block[1]+1;
-        } else if (!isARow && !isIncereasing){
+        } else if (!isARow && !isIncreasing){
             newBlock[0] = block[0];
             newBlock[1] = block[1]-1;
         }
-
-
-//        int[] newBlock = {block[0]-1,block[1]};
 
         this.removeBlock(key,block,false);
         this.addBlock(key,newBlock,false);
@@ -228,7 +226,6 @@ public class Board{
                 }
         	}
         }
-//        System.out.println("movenotavail" +Arrays.toString(moveAvailable));
 	    return moveAvailable;
 	}
         
