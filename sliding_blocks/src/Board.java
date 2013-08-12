@@ -160,7 +160,7 @@ public class Board{
         return moves;
     }
 
-    private boolean thisMoveWorked(int[] block,String key, boolean isARow, boolean isIncreasing){
+    public boolean thisMoveWorked(int[] block,String key, boolean isARow, boolean isIncreasing){
         boolean rtn = false;
         int[] newBlock = new int[2];
         if (isARow && isIncreasing){
@@ -190,47 +190,58 @@ public class Board{
 
     private boolean[] isFreeToMove(int[] dimensions,int[] block) {
         boolean[] moveAvailable = new boolean[4];
-        
+        moveAvailable[0] = true;
+        moveAvailable[1] = true;
+        moveAvailable[2] = true;
+        moveAvailable[3] = true;
+
         //checking for top move - block[1] is num of row
         if (block[0] - 1 >= 0){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
         		if (notEmpty[block[0]-1][i]){
-                    moveAvailable[0] = true;
+                    moveAvailable[0] = false;
                 }
         	}
+
+        }  else{
+            moveAvailable[0] = false;
         }
         
         //checking for bottom move
         if (block[0] + dimensions[0] <= row){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
         		if (notEmpty[block[0]+1][i]){
-                    moveAvailable[0] = true;
+                    moveAvailable[0] = false;
                 }
         	}
+        } else {
+            moveAvailable[1]  = false;
         }
         
         //checking for left move
         if (block[1] - 1 >= 0){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
         		if (notEmpty[i][block[1]-1]){
-                  moveAvailable[2] = true;
+                  moveAvailable[2] = false;
                 }
         	}
+        } else {
+            moveAvailable[2] = false;
         }
 
         //checking for right move
         if (block[1] + dimensions[1] <= col){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
                 if (notEmpty[i][block[1]+dimensions[1]+1]){
-                	moveAvailable[3] = true;
+                	moveAvailable[3] = false;
                 }
         	}
+        } else {
+            moveAvailable[3] = false;
         }
 	    return moveAvailable;
 	}
-        
-        
-    
+
     //CHANGED KEY TO BE String "row + " " + col"
     public static int[] keyToIntArray(String key){
     	String[] rtnKey = key.split("\\s+");
@@ -241,27 +252,6 @@ public class Board{
         rtn[0] = Integer.parseInt(rtnKey[0]);
         rtn[1] = Integer.parseInt(rtnKey[1]);
         return rtn;
-    }
-    
-    //TESTING PURPOSES ONLY
-    public static void main(String args[]){
-    	Board b = new Board(5,4);
-    	//upperleft row and col arrays
-    	int[] array1 = {0,0};
-		int[] array2 = {2,1};
-		int[] array3 = {3,2};
-
-		b.addBlock("1 1", array1, true);
-		b.addBlock("1 1", array1, true);
-		b.addBlock("1 2", array2, true);
-		b.addBlock("1 1",array3, true);
-		
-		System.out.println(b);
-		int[] dimensions = keyToIntArray("1 1");
-		int[] block = array1;
-		int[] block2 = array2;
-		b.isFreeToMove(dimensions, block);
-		b.isFreeToMove(dimensions, block2);
     }
 
 }
