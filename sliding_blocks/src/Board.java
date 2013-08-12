@@ -88,7 +88,7 @@ public class Board{
         int blockColumns = dimensions[1];
 
         if (upperleft[0] < 0  || upperleft[1] < 0 || upperleft[0]+blockRows > row || upperleft[1]+blockColumns > col){
-           System.err.println("Internal inconsistency in changeWhiteSpaces");
+            System.err.println("Internal inconsistency in changeWhiteSpaces");
         }
         for (int i = upperleft[0]; i < blockRows+upperleft[0]; i++){
             for(int j = upperleft[1]; j < blockColumns+upperleft[1]; j++){
@@ -193,33 +193,40 @@ public class Board{
     private boolean[] isFreeToMove(int[] dimensions,int[] block) {
         boolean[] moveAvailable = new boolean[4];
         
-        //checking for top move
-        for (int i = block[1]; i < block[1] + dimensions[1]; i++){
-            if (notEmpty[block[0]-1][i]){
-                moveAvailable[0] = true;
-            }
+        //checking for top move - block[1] is num of row
+        if (block[0] - 1 >= 0){
+        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+        		if (notEmpty[block[0]-1][i]){
+                    moveAvailable[0] = true;
+                }
+        	}
         }
         
         //checking for bottom move
-        for (int i = block[1]; i < block[1] + dimensions[1]; i++){
-            if (notEmpty[block[0]+1][i]){
-                moveAvailable[0] = true;
-            }
+        if (block[0] + dimensions[0] <= row){
+        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+        		if (notEmpty[block[0]+1][i]){
+                    moveAvailable[0] = true;
+                }
+        	}
         }
-
         
         //checking for left move
-        for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-            if (notEmpty[i][block[1]-1]){
-              moveAvailable[2] = true;
-            }
+        if (block[1] - 1 >= 0){
+        	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
+        		if (notEmpty[i][block[1]-1]){
+                  moveAvailable[2] = true;
+                }
+        	}
         }
 
         //checking for right move
-        for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-            if (notEmpty[i][block[1]+dimensions[1]+1]){
-                moveAvailable[3] = true;
-            }
+        if (block[1] + dimensions[1] <= col){
+        	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
+                if (notEmpty[i][block[1]+dimensions[1]+1]){
+                	moveAvailable[3] = true;
+                }
+        	}
         }
 //        System.out.println("movenotavail" +Arrays.toString(moveAvailable));
 	    return moveAvailable;
@@ -253,7 +260,7 @@ public class Board{
 		b.addBlock("1 1",array3, true);
 		
 		System.out.println(b);
-		int[] dimensions = b.keyToIntArray("1 1");
+		int[] dimensions = keyToIntArray("1 1");
 		int[] block = array1;
 		int[] block2 = array2;
 		b.isFreeToMove(dimensions, block);
