@@ -202,11 +202,12 @@ public class Board{
         moveAvailable[1] = true; //bottom
         moveAvailable[2] = true; //left
         moveAvailable[3] = true; //right
+        
+        
 
-
-        //Check top move.
-        if ((block[0] -1) >= 0){
-            for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+        //Check top move
+        if (block[0] > 0) {
+        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
                 if (notEmpty[block[0]-1][i]){
                     moveAvailable[0] = false;
                 }
@@ -214,38 +215,39 @@ public class Board{
         }   else {
             moveAvailable[0] = false;
         }
-        //Check bottom move.
-        if ((block[0] + dimensions[0]) < notEmpty.length){
-            for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+        //Check bottom move
+        if(block[0] + dimensions[0] < row) {
+        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
                 if (notEmpty[block[0]+dimensions[0]][i]){
-                    moveAvailable[1] = false;
+                	moveAvailable[1] = false;
                 }
             }
         }   else {
             moveAvailable[1] = false;
         }
-        //Check left move.
-        if ((block[1] -1) >= 0){
+        //Check left move
+        if (block[1] > 0){
             for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-                if (notEmpty[i][block[1]-1]){
+            	if (notEmpty[i][block[1]-1]){
                     moveAvailable[2] = false;
                 }
+            	
             }
         }   else {
             moveAvailable[2] = false;
         }
-         //Check right move.
-         if ((block[1] + dimensions[1]) < notEmpty[0].length){
-             for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-                 if (notEmpty[block[1]+dimensions[1 ]][i]){
-                     moveAvailable[3] = false;
-                 }
-             }
-         }   else {
-             moveAvailable[3] = false;
-         }
-
-
+        
+        //Check right move
+        if (block[1] + dimensions[1] < col){
+        	
+            for (int i = block[0]; i < block[0] + dimensions[0]; i++){
+                if (notEmpty[i][block[1]+dimensions[1]]){
+                    moveAvailable[3] = false;
+                }
+            }
+        } else{
+            moveAvailable[3] = false;
+        }
 
 	    return moveAvailable;
     }
@@ -260,5 +262,6 @@ public class Board{
         rtn[1] = Integer.parseInt(rtnKey[1]);
         return rtn;
     }
+
 
 }
