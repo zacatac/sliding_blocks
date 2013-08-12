@@ -6,15 +6,21 @@
  * To change this template use File | Settings | File Templates.
  */
 import junit.framework.TestCase;
+import org.junit.Test;
 
-import java.lang.reflect.Method;
 import java.util.*;
+
+import static org.junit.Assert.*;
 
 
 public class SolverTest extends TestCase {
 
+
+
+
+    @Test
     public void testimport() {
-        Solver s = new Solver();
+
 
         String[] args = new String[2];
         args[0] = "/Users/zrfield/GitHub/sliding_blocks/sliding_blocks/test/big.block.4.txt";
@@ -35,13 +41,15 @@ public class SolverTest extends TestCase {
 //        s.main(args3);
     }
 
+   @Test
    public void testDoMove() {
        int row = 3;
        int column = 4;
+       Solver s = new Solver(3,4);
+       Move move = new Move(s.getGoalBoard());
        int line = 0; //a sample test line number
        boolean iWantToChaneNotEmpty = true; // for testing purposes.
-       Board board = new Board(row,column);
-       String[] s = {"0 0 0 1",
+       String[] strings = {"0 0 0 1",
                "1 0 1 0",
                "1 1 1 1",
                "0 2 0 3",
@@ -49,7 +57,7 @@ public class SolverTest extends TestCase {
                "2 2 2 3"};
 
        for (int i = 0; i < 6; i++){
-           Solver.makeBlock(board,s[i],row,column,line,iWantToChaneNotEmpty);
+           Solver.makeBlock(s.getBoard(),strings[i],row,column,line,iWantToChaneNotEmpty);
        }
 
        boolean[][] testWhiteSpaces = {{true,true,true,true},
@@ -57,12 +65,10 @@ public class SolverTest extends TestCase {
                {true,true,true,true},
        };
 
-       boolean[][] shouldMatchTheExpected = board.getNotEmpty();
-       for (int i = 0; i < testWhiteSpaces.length; i++){
-           for (int j = 0; j < testWhiteSpaces[0].length;j++){
-               assertEquals(testWhiteSpaces[i][j],shouldMatchTheExpected[i][j]);
-           }
-       }
+       boolean[][] shouldMatchTheExpected = s.getBoard().getNotEmpty();
+       assertArrayEquals(testWhiteSpaces,shouldMatchTheExpected);
+       int[] containsThis = {0,2};
+       assertTrue(s.getBoard().getBoard().containsKey("1 2"));
 
        int previousRow = 0;
        int previousColumn = 2;
@@ -72,52 +78,77 @@ public class SolverTest extends TestCase {
        int dimColumns = 2;
        int depth = 1;
 
+
        Move move1 = new Move(previousRow,previousColumn,nextRow,nextColumn,dimRows,dimColumns,depth);
        Stack<Move> myStack = new Stack<Move>();
        PriorityQueue<Move> myQueue = new PriorityQueue<Move>();
-       Solver.setMoveStack(myStack);
-       Solver.setMoveQueue(myQueue);
-       Solver.doMove(board,move1);
+       s.setMoveStack(myStack);
+       s.setMoveQueue(myQueue);
+       s.doMove(s.getBoard(),move1);
 
        boolean[][] firstMoveSpaces = {{true,true,false,false},
                                       {true,true,true,true},
                                       {true,true,true,true},
                                };
 
-       shouldMatchTheExpected = board.getNotEmpty();
-       for (int i = 0; i < testWhiteSpaces.length; i++){
-           for (int j = 0; j < testWhiteSpaces[0].length;j++){
-               assertEquals(firstMoveSpaces[i][j],shouldMatchTheExpected[i][j]);
-           }
-       }
 
-       Solver.undoMove(board,move1);
+       shouldMatchTheExpected = s.getBoard().getNotEmpty();
+       assertArrayEquals(firstMoveSpaces,shouldMatchTheExpected);
+
+       s.undoMove(s.getBoard(), move1);
 
        boolean[][] undoFirstMoveSpaces = {{true,true,true,true},
                {true,true,false,false},
                {true,true,true,true},
        };
 
-       shouldMatchTheExpected = board.getNotEmpty();
-       for (int i = 0; i < testWhiteSpaces.length; i++){
-           for (int j = 0; j < testWhiteSpaces[0].length;j++){
-               assertEquals(testWhiteSpaces[i][j],shouldMatchTheExpected[i][j]);
-           }
-       }
+       printTwoDimArray(s.getBoard().getNotEmpty());
+       shouldMatchTheExpected = s.getBoard().getNotEmpty();
+       assertArrayEquals(undoFirstMoveSpaces,shouldMatchTheExpected);
 
-       Solver.doMove(board,move1);
+       s.doMove(s.getBoard(),move1);
 
        Move move2 = new Move(0,0,0,1,1,2,2);
 
-       Solver.doMove(board,move2);
-       Solver.doMove(board,move1);
+       printTwoDimArray(s.getBoard().getNotEmpty());
+
+       s.doMove(s.getBoard(),move2);
+
+       printTwoDimArray(s.getBoard().getNotEmpty());
+       s.doMove(s.getBoard(),move1);
+
+       printTwoDimArray(s.getBoard().getNotEmpty());
+       shouldMatchTheExpected = s.getBoard().getNotEmpty();
+       assertArrayEquals(firstMoveSpaces,shouldMatchTheExpected);
 
        //Continue the comparison for this later
 
 
    }
 
+    public static void printTwoDimArray(boolean[][] booleans){
+        System.out.println("WhiteSpaces");
+        System.out.print("[");
+        for (int i  = 0; i < booleans.length; i++){
+            System.out.print("[");
+            for (int j  = 0; j < booleans[0].length; j++){
+                System.out.print(booleans[i][j] + " ");
+            }
+            if (i ==booleans.length-1){
+                System.out.print("]]" + "\n");
+            }  else{
+                System.out.print("]," + "\n");
+            }
+
+        }
+    }
+
+    @Test
     public void testMakeBlock(){
+        HashMap<String,ArrayList<int[]>> map = new HashMap<String, ArrayList<int[]>>();
+        Board goalBoard = new Board(3,4);
+        goalBoard.setBoard(map);
+        Move move = new Move(goalBoard);
         int row = 3;
         int column = 4;
         int line = 0; //a sample test line number
@@ -143,11 +174,11 @@ public class SolverTest extends TestCase {
         int[] upperLeft4 = {2,0};
         int[] upperLeft5 = {2,2};
 
-        assertTrue(boardMap.containsKey("11"));
-        assertTrue(boardMap.containsKey("12"));
+        assertTrue(boardMap.containsKey("1 1"));
+        assertTrue(boardMap.containsKey("1 2"));
 
-        ArrayList<int[]> blocks11 = boardMap.get("11");
-        ArrayList<int[]> blocks12 = boardMap.get("12");
+        ArrayList<int[]> blocks11 = boardMap.get("1 1");
+        ArrayList<int[]> blocks12 = boardMap.get("1 2");
 
         for (int i = 0; i < 2; i++){
             assertTrue(blocks11.get(0)[i] == upperLeft1[i]);
