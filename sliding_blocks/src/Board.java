@@ -73,31 +73,20 @@ public class Board{
         if (iWantToChangeNotEmpty){
             changeWhiteSpaces(blockdimension,upperleft,false);
         }
-
-
     }
 
-    //changes the whitespace, takes in 
     public void changeWhiteSpaces(String blockdimension, int[] upperleft, boolean changeTo){
     	int[] dimensions = keyToIntArray(blockdimension);
         int blockRows = dimensions[0];
         int blockColumns = dimensions[1];
-        int i = upperleft[0];
-        int j = upperleft[1];
-//        for (int i = upperleft[0]; i <= blockRows + upperleft[0]-1; i++){
-//        	Arrays.fill(notEmpty[i][], upperleft[1], upperleft[1] + blockColumns -1, changeTo);
-//        }
-        
-        while (i <= blockRows+upperleft[0]-1){
-            while(j <= blockColumns+upperleft[1]-1){
-                if (changeTo == true) {
-                	notEmpty[i][j] = true;
-                } else {
-                	notEmpty[i][j] = false;
-                }
-                j= j +1;
+
+        if (upperleft[0] < 0  || upperleft[1] < 0 || upperleft[0]+blockRows > row || upperleft[1]+blockColumns > col){
+            throw new IllegalArgumentException("Internal inconsistency in changeWhiteSpaces");
+        }
+        for (int i = upperleft[0]; i < blockRows+upperleft[0]; i++){
+            for(int j = upperleft[1]; j < blockColumns+upperleft[1]; j++){
+                notEmpty[i][j] = changeTo;
             }
-            i = i + 1;;
         }
     }
 
