@@ -203,54 +203,51 @@ public class Board{
         moveAvailable[2] = true; //left
         moveAvailable[3] = true; //right
 
-        //checking for top move - block[1] is num of row
-        if (block[0] > 0){
-        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
-        		if (notEmpty[block[0]-1][i]){
+
+        //Check top move.
+        if ((block[0] -1) >= 0){
+            for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+                if (notEmpty[block[0]-1][i]){
                     moveAvailable[0] = false;
                 }
-        	}
-
-        } else{
+            }
+        }   else {
             moveAvailable[0] = false;
         }
-        
-        //checking for bottom move
-        if (block[0] + dimensions[0] < row){
-        	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
-        		if (notEmpty[block[0]+dimensions[0]][i]){
+        //Check bottom move.
+        if ((block[0] + dimensions[0]) < notEmpty.length){
+            for (int i = block[1]; i < block[1] + dimensions[1]; i++){
+                if (notEmpty[block[0]+dimensions[0]][i]){
                     moveAvailable[1] = false;
-                    System.out.println("CHECK BOTTOM (A)");
                 }
-        	}
-        } else {
-            moveAvailable[1]  = false;
-            System.out.println("CHECK BOTTOM(B)");
+            }
+        }   else {
+            moveAvailable[1] = false;
         }
-        
-        //checking for left move
-        if (block[1] > 0){
-        	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-        		if (notEmpty[i][block[1]-1]){
-                  moveAvailable[2] = false;
+        //Check left move.
+        if ((block[1] -1) >= 0){
+            for (int i = block[0]; i < block[0] + dimensions[0]; i++){
+                if (notEmpty[i][block[1]-1]){
+                    moveAvailable[2] = false;
                 }
-        	}
-        } else {
+            }
+        }   else {
             moveAvailable[2] = false;
         }
+         //Check right move.
+         if ((block[1] + dimensions[1]) < notEmpty[0].length){
+             for (int i = block[0]; i < block[0] + dimensions[0]; i++){
+                 if (notEmpty[block[1]+dimensions[1 ]][i]){
+                     moveAvailable[3] = false;
+                 }
+             }
+         }   else {
+             moveAvailable[3] = false;
+         }
 
-        //checking for right move
-        if (block[1] + dimensions[1] < col){
-        	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
-                if (notEmpty[i][block[1]+dimensions[1]]){
-                	moveAvailable[3] = false;
-                }
-        	}
-        } else {
-            moveAvailable[3] = false;
-        }
-//        System.out.println(Arrays.toString(moveAvailable));
-	return moveAvailable;
+
+
+	    return moveAvailable;
     }
     //CHANGED KEY TO BE String "row + " " + col"
     public static int[] keyToIntArray(String key){
