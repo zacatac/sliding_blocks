@@ -23,6 +23,9 @@ public class Board{
     public HashMap<String,ArrayList<int[]>> getBoard(){
         return board;
     }
+    public HashSet<String> getMoveHistory(){
+        return moveHistory;
+    }
 
     public void setNotEmpty(boolean[][] notEmpty){
         this.notEmpty = notEmpty;
@@ -179,8 +182,9 @@ public class Board{
 
         this.removeBlock(key,block,false);
         this.addBlock(key,newBlock,false);
-        if (moveHistory.add(board.toString())) {
+        if (!moveHistory.contains(this.toString())) {
             rtn = true;
+            moveHistory.add(this.toString());
         }
         this.removeBlock(key,newBlock,false);
         this.addBlock(key,block,false);
