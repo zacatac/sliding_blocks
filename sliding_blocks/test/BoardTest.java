@@ -1,8 +1,8 @@
 import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Arrays;
+import java.util.*;
 
 import junit.framework.TestCase;
 
@@ -31,16 +31,28 @@ public class BoardTest extends TestCase{
 				assertTrue(b2.getNotEmpty()[i][j]);
 			}
 		}
-		
-		//test adding a 2x2 block covering the whole board
-//WHY DOES THIS NOT WORK D:
+
 		Board b3 = new Board(2,2);
 		b3.addBlock("2 2", array, true);
-		
-		assertTrue(b2.getNotEmpty()[0][0]);
-		assertTrue(b2.getNotEmpty()[0][1]);
-		assertTrue(b2.getNotEmpty()[1][0]);
-		assertTrue(b2.getNotEmpty()[1][1]);
+		boolean[][] notEmpty = b3.getNotEmpty();
+//        System.out.print("[");
+//        for (int i  = 0; i < notEmpty.length; i++){
+//            System.out.print("[");
+//            for (int j  = 0; j < notEmpty[0].length; j++){
+//                System.out.print(notEmpty[i][j] + " ");
+//            }
+//            if (i == notEmpty.length-1){
+//                System.out.print("]]" + "\n");
+//            }  else{
+//                System.out.print("]," + "\n");
+//            }
+//
+//        }
+        System.out.println();
+		assertTrue(b3.getNotEmpty()[0][0]);
+		assertTrue(b3.getNotEmpty()[0][1]);
+		assertTrue(b3.getNotEmpty()[1][0]);
+		assertTrue(b3.getNotEmpty()[1][1]);
 		
 	}
 	
@@ -205,4 +217,21 @@ public class BoardTest extends TestCase{
 		
 		//test removing blocks 
 	}
+
+    public void testThisMoveWorked(){
+        Board board = new Board(3,3);
+        int[] upperLeft = {0,0};
+
+        board.addBlock("1 1",upperLeft,false);
+        assertTrue(board.thisMoveWorked(upperLeft, "1 1", false, true));
+        board.removeBlock("1 1",upperLeft,false);
+        upperLeft[1] = 1;
+        board.addBlock("1 1",upperLeft,false );
+        assertTrue(board.getMoveHistory().contains(board.toString()));
+        board.removeBlock("1 1",upperLeft,false);
+        upperLeft[1] = 2;
+        board.addBlock("1 1",upperLeft,false);
+        assertFalse(board.thisMoveWorked(upperLeft, "1 1", false, false));
+
+    }
 }
