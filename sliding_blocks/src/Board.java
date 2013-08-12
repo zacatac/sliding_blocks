@@ -82,13 +82,13 @@ public class Board{
         }
     }
 
-    public void changeWhiteSpaces(String blockdimension, int[] upperleft, boolean changeTo) throws IllegalArgumentException{
+    public void changeWhiteSpaces(String blockdimension, int[] upperleft, boolean changeTo){
     	int[] dimensions = keyToIntArray(blockdimension);
         int blockRows = dimensions[0];
         int blockColumns = dimensions[1];
 
         if (upperleft[0] < 0  || upperleft[1] < 0 || upperleft[0]+blockRows > row || upperleft[1]+blockColumns > col){
-            throw new IllegalArgumentException("Internal inconsistency in changeWhiteSpaces");
+           System.err.println("Internal inconsistency in changeWhiteSpaces");
         }
         for (int i = upperleft[0]; i < blockRows+upperleft[0]; i++){
             for(int j = upperleft[1]; j < blockColumns+upperleft[1]; j++){
