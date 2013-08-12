@@ -1,4 +1,5 @@
-import java.util.ArrayList;
+import java.util.*;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,15 +23,19 @@ public class Move implements Comparable{
 
 
     private int[] info = new int[7];
-    private static Board goalBoard;
+    private static HashMap<String,ArrayList<int[]>> goalBoard;
+    private static int goalRows, goalColumns;
     private int myScore;
     public Move parentMove;
 
     public Move(Board goalBoard){
-        Move.goalBoard = goalBoard;
+        Move.goalBoard = goalBoard.getBoard();
+        int[] rowsANDcolumns = goalBoard.getRowsAndColumns();
+        Move.goalRows = rowsANDcolumns[0];
+        Move.goalColumns = rowsANDcolumns[1];
     }
 
-
+    //MAY HAVE TO HANDLE INTEGER OVERFLOWS FOR THE DEPTH!
     public Move(int previousRow,     //0
                 int previousColumn,  //1
                 int nextRow,         //2
@@ -79,8 +84,23 @@ public class Move implements Comparable{
     }
 
 
-    public int calculateScore(int[] info) {
-        return 0;
+    public static int calculateScore(int[] info) {
+        int toGoal = goalRows + goalColumns;  //can be optimized
+        int fromStart = info[6];              //can be optimized
+        String key = info[4] + " " + info[5];
+        ArrayList<int[]> blocks = goalBoard.get(key);
+        if (!(blocks == null)){
+            Iterator<int[]> iter = blocks.iterator();
+            while (iter.hasNext()){
+                int[] thisBlock = iter.next();
+                int temp = thisBlock[0] + thisBlock[1];
+                if (temp < toGoal){
+                    toGoal = temp;
+                }
+            }
+        }
+
+        return fromStart +
     }
 
     public int[] getInfo(){
@@ -124,7 +144,10 @@ public class Move implements Comparable{
         } catch(ClassCastException c){
             System.err.println("EQUALS: You are not comparing two Move objects, " +
                     "\n are you trying to break something?");
-            System.exit(1);
+            return false;
+        }
+        if (specifiedMove == null){
+            return false;
         }
         int[] myInfo  = this.getInfo();
         int[] specified = specifiedMove.getInfo();

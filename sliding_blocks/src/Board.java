@@ -26,6 +26,10 @@ public class Board{
     public HashSet<String> getMoveHistory(){
         return moveHistory;
     }
+    public int[] getRowsAndColumns(){
+        int[] rtn = {row,col};
+        return rtn;
+    }
 
     public void setNotEmpty(boolean[][] notEmpty){
         this.notEmpty = notEmpty;
