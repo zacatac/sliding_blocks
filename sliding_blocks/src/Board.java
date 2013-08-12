@@ -188,7 +188,7 @@ public class Board{
     }
 
 
-    private boolean[] isFreeToMove(int[] dimensions,int[] block) {
+    public boolean[] isFreeToMove(int[] dimensions,int[] block) {
         boolean[] moveAvailable = new boolean[4];
         moveAvailable[0] = true;
         moveAvailable[1] = true;
@@ -206,7 +206,7 @@ public class Board{
         }  else{
             moveAvailable[0] = false;
         }
-        
+
         //checking for bottom move
         if (block[0] + dimensions[0] <= row){
         	for (int i = block[1]; i < block[1] + dimensions[1]; i++){
@@ -217,7 +217,7 @@ public class Board{
         } else {
             moveAvailable[1]  = false;
         }
-        
+
         //checking for left move
         if (block[1] - 1 >= 0){
         	for (int i = block[0]; i < block[0] + dimensions[0]; i++){
