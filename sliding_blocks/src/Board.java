@@ -106,7 +106,7 @@ public class Board{
         }
     }
 
-
+    @Override
 	public String toString() {
 		String rtn="";
 		for (String i:board.keySet()) {
@@ -122,17 +122,36 @@ public class Board{
 		return rtn;
 	}
 
+    @Override
+    public boolean equals(Object o){
+        Board argBoard = null;
+        try{
+            argBoard = (Board)o;
+        } catch (ClassCastException c ){
+            return false;
+        }
+        if (argBoard == null){
+            return false;
+        } else {
+            return this.toString().equals(argBoard.toString());
+        }
+
+    }
+
 
 	// finds all possible moves
     public ArrayList<Move> findMoves(int depth){
-        depth++;  //iterate the depth counter
+
 
         ArrayList<Move> moves = new ArrayList<Move>();
-        Set<String> keys = board.keySet();
-        for (String key:keys){
-            Iterator<int[]> iter = board.get(key).iterator();
-            while (iter.hasNext()){
-                int[] block = iter.next();
+        Set<String> keySet = board.keySet();
+        Object[] keyArray = keySet.toArray();
+        for (int i = 0; i < keyArray.length; i++ ){
+            String key = (String)keyArray[i];
+            ArrayList<int[]> blockList =  board.get(key);
+            for (int j = 0; j < blockList.size(); j++){
+                int[] block = blockList.get(j);
+
                 int[] dimensions = keyToIntArray(key);
                 boolean[] freeToMove = isFreeToMove(dimensions,block);
 
@@ -164,6 +183,7 @@ public class Board{
                 }
             }
         }
+
         return moves;
     }
 

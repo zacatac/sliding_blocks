@@ -8,7 +8,7 @@ import java.util.*;
  * Time: 6:33 PM
  * To change this template use File | Settings | File Templates.
  */
-public class Move implements Comparable{
+public class Move implements Comparable {
 
     /**
      * Moves are stored as [previous row,
@@ -25,7 +25,7 @@ public class Move implements Comparable{
     private int[] info = new int[7];
     private static HashMap<String,ArrayList<int[]>> goalBoard;
     private static int goalRows, goalColumns;
-    private int myScore;
+    protected int myScore;
     public Move parentMove;
 
     public Move(Board goalBoard){
@@ -51,6 +51,7 @@ public class Move implements Comparable{
         this.info[4] = dimRows;
         this.info[5] = dimColumns;
         this.info[6] = depth;
+
         this.myScore = calculateScore(this.info);
         this.parentMove = parentMove;
     }
@@ -83,7 +84,6 @@ public class Move implements Comparable{
         this(alreadyFormed,null);
     }
 
-
     public static int calculateScore(int[] info) {
         int toGoal = goalRows + goalColumns;  //can be optimized
         int fromStart = info[6];              //can be optimized
@@ -93,48 +93,21 @@ public class Move implements Comparable{
             Iterator<int[]> iter = blocks.iterator();
             while (iter.hasNext()){
                 int[] thisBlock = iter.next();
-                int temp = thisBlock[0] + thisBlock[1];
+                int temp = Math.abs(info[2]-thisBlock[0])  + Math.abs(info[3] - thisBlock[1]);
                 if (temp < toGoal){
                     toGoal = temp;
                 }
             }
         }
 
-        return fromStart +
+        return fromStart + toGoal;
+//        return 0;
     }
 
     public int[] getInfo(){
         return this.info;
     }
 
-
-    @Override
-    /**
-     * Here the overridden compareTo follows uses the usual -1,0,1
-     * output signature, but in this case a -1 output is given if the
-     * specified object is a worse move than "this" object, in terms
-     * of the "fitness" of the move. If the opposite is true then a 1
-     * is returned, and if this move is of the same "fitness"
-     * as the specified move then it will return 0.
-     */
-    public int compareTo(Object o) {
-        Move specified = null;
-        try {
-            specified = (Move)o;
-        } catch(ClassCastException c){
-            System.err.println("COMPARETO: You are not comparing two Move objects, " +
-                    "\n are you trying to break something?");
-            System.exit(1);
-        }
-
-        if (this.myScore < specified.myScore){
-            return 1;
-        } else if (this.myScore > specified.myScore){
-            return -1;
-        } else {
-            return 0;
-        }
-    }
 
     @Override
     public boolean equals(Object o){
@@ -173,5 +146,34 @@ public class Move implements Comparable{
         s += "]";
         return s;
 
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        MoveComparator mc = new MoveComparator();
+        return mc.compare(this,(Move)o);
+    }
+
+    private class MoveComparator implements Comparator<Move>{
+
+        @Override
+        /**
+         * Here the overridden compareTo follows uses the usual -1,0,1
+         * output signature, but in this case a -1 output is given if the
+         * specified object is a worse move than "this" object, in terms
+         * of the "fitness" of the move. If the opposite is true then a 1
+         * is returned, and if this move is of the same "fitness"
+         * as the specified move then it will return 0.
+         */
+        public  int compare(Move o1, Move o2) {
+            Move specified = null;
+            if (o1.myScore < o2.myScore){
+                return 1;
+            } else if (o1.myScore > o2.myScore){
+                return -1;
+            } else {
+                return 0;
+            }
+        }
     }
 }

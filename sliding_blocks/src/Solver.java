@@ -10,22 +10,34 @@ import java.util.*;
 // GITHUB TEST - CHERYL
 public class Solver {
     public static final boolean iamDebugging = false;
-    private static Stack<Move> moveStack;
-    private static PriorityQueue<Move> moveQueue;
+    private Stack<Move> moveStack = new Stack<Move>();
+    private  PriorityQueue<Move> moveQueue = new PriorityQueue<Move>();
+    private Board board;
+    private Board goalBoard;
 
-
+    public Solver(int row,int column){
+        board = new Board(row,column);
+        goalBoard = new Board(row,column);
+    }
     public Stack<Move> getMoveStack(){
         return moveStack;
     }
-    public static void setMoveStack(Stack<Move> myStack){
-        moveStack = myStack;
+    public  void setMoveStack(Stack<Move> myStack){
+        this.moveStack = myStack;
     }
-    public static PriorityQueue<Move> getMoveQueue() {
-        return moveQueue;
+    public  PriorityQueue<Move> getMoveQueue() {
+        return this.moveQueue;
     }
-    public static void setMoveQueue(PriorityQueue<Move> myQueue){
-        moveQueue = myQueue;
+    public  void setMoveQueue(PriorityQueue<Move> myQueue){
+        this.moveQueue = myQueue;
     }
+    public Board getBoard() {
+        return this.board;
+    }
+    public Board  getGoalBoard(){
+        return this.goalBoard;
+    }
+
 
     public static void main(String[] args) {
         if (args.length == 0){
@@ -56,7 +68,9 @@ public class Solver {
             System.err.println("The first line must contain two numbers.");
             System.exit(1);
         }
-        Board board = new Board(row,col);
+        Solver solver = new Solver(row,col);
+
+//        Board board = new Board(row,col);
         while (true){
             String s = newSource.readLine ();
 //            if (iamDebugging){
@@ -65,7 +79,7 @@ public class Solver {
             if (s == null) {
                 break;
             }
-            makeBlock(board, s, row, col, newSource.lineNumber(),true);
+            makeBlock(solver.board, s, row, col, newSource.lineNumber(), true);
         }
 
         InputSource goalSource = new InputSource(args[1]); //change to args[1] when you setup the option
@@ -73,40 +87,47 @@ public class Solver {
         Board goalBoard= new Board();
         while (true){
             String s = goalSource.readLine ();
-//            if (iamDebugging){
-//                System.out.println(s);
-//            }
+            if (iamDebugging){
+                System.out.println("GOAL LINE BY LINE: " + s);
+            }
             if (s == null) {
                 break;
             }
-            makeBlock(goalBoard, s, row, col, goalSource.lineNumber(),false);
+            solver.makeBlock(solver.goalBoard, s, row, col, goalSource.lineNumber(), false);
         }
 
         if (iamDebugging){
             System.out.println("INITIAL BOARD: ");
-            System.out.println(board);
+            System.out.println(solver.board);
             System.out.println("GOAL BOARD: ");
-            System.out.println(goalBoard);
+            System.out.println(solver.goalBoard);
         }
         Move firstMove = new Move(goalBoard);
 
-        solveTheDamnPuzzle(board,goalBoard);
+        solver.solveTheDamnPuzzle(solver.board, solver.goalBoard);
 
         
     }
 
-    public static void solveTheDamnPuzzle (Board board, Board goalBoard){
+    public  void solveTheDamnPuzzle (Board board, Board goalBoard){
         int depth = 1;
 
         ArrayList<Move> firstAvailableMoves = board.findMoves(depth);
         for (Move move:firstAvailableMoves){
-
             moveQueue.add(move);
         }
+        System.out.println("SIZE OF QUEUE: " + moveQueue.size());
+        System.out.println("SIZE OF STACK: " + moveStack.size());
+        System.out.println("BEST MOVE NOW: " + moveQueue.peek());
 
+        System.out.println("WIN STATUS: " + board.equals(goalBoard));
+        if (board.equals(goalBoard)){
+            theWinnersCircle();
+            return;
+        }
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
-
+            System.out.println("BEST MOVE POLLED: " + bestMove);
             if (iamDebugging){
                 System.out.println("BEST MOVE: " + bestMove);
             }
@@ -117,17 +138,7 @@ public class Solver {
 
             //Winning case
             if (board.equals(goalBoard)) {
-                System.out.println("CONGRATULATIONS! You took all the fun out of \n" +
-                        "a classic puzzle by having a computer solve it for you \n" +
-                        "here's your prize...\n");
-                ArrayList<Move> movesBackward = new ArrayList<Move>();
-                while (!moveStack.isEmpty()) {
-                    movesBackward.add(0, moveStack.pop());
-                }
-                for (Move move:movesBackward){
-                int[] info = move.getInfo();
-                System.out.println("[ ("+ info[0] + "," + info[1]+") ("+ info[2] + "," + info[3]+") ]");
-                }
+                theWinnersCircle();
             }
             depth = bestMove.getInfo()[6]++;
             ArrayList<Move> nextAvailableMoves = board.findMoves(depth);
@@ -138,9 +149,24 @@ public class Solver {
         System.out.println("You're shit outta luck...");
     }
 
+    private void theWinnersCircle(){
+//        System.out.println("CONGRATULATIONS! You took all the fun out of \n" +
+//                "a classic puzzle by having a computer solve it for you \n" +
+//                "here's your prize...\n");
+        System.out.println("WIN")  ;
+        ArrayList<Move> movesBackward = new ArrayList<Move>();
+        while (!moveStack.isEmpty()) {
+            movesBackward.add(0, moveStack.pop());
+        }
+        for (Move move:movesBackward){
+            int[] info = move.getInfo();
+            System.out.println("[ ("+ info[0] + "," + info[1]+") ("+ info[2] + "," + info[3]+") ]");
+        }
+    }
+
 
     //"makes" and adds a block to a board
-    public static void makeBlock (Board b, String x, int maxRow, int maxCol, int line,boolean onOff) {
+    public static void makeBlock (Board b,String x, int maxRow, int maxCol, int line,boolean onOff) {
         int rowUpper = 0;
         int colUpper = 0;
         int rowLower = 0;
@@ -159,9 +185,9 @@ public class Solver {
             colUpper = Integer.parseInt(posArray[1]);
             rowLower = Integer.parseInt(posArray[2]);
             colLower = Integer.parseInt(posArray[3]);
-            if (iamDebugging){
-            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
-            }
+//            if (iamDebugging){
+//            System.out.println(rowUpper + "" + colUpper + "" + rowLower + "" + colLower);
+//            }
             if ((rowUpper < 0 || rowUpper > maxRow) || (rowLower < 0 || rowLower > maxRow)){
                 throw new IllegalArgumentException("Invalid row inputs at line " + line);
             }
@@ -178,21 +204,21 @@ public class Solver {
         } catch (NumberFormatException e){
             throw new IllegalArgumentException("Each line must contain 4 numbers.");
         }
-        String dimentions = "";
-        dimentions += rowLower - rowUpper + 1;
-        dimentions += colLower - colUpper + 1;
+        String dimensions = "";
+        dimensions += rowLower - rowUpper + 1 + " ";
+        dimensions += colLower - colUpper + 1;
         int[] upperLeft = new int[2];
         upperLeft[0] = rowUpper;
         upperLeft[1] = colUpper;
-        b.addBlock(dimentions, upperLeft,onOff);
-        
+        b.addBlock(dimensions, upperLeft, onOff);
+
     }
 
     //Completes an actual move and updates the move.
-    public static void doMove(Board board, Move move){
+    public  void doMove(Board board, Move move){
         int[] info = move.getInfo();
         int depth = info[6];
-        String blockDimension = "" + info[4] + info[5];
+        String blockDimension = "" + info[4] +" "+ info[5];
         int[] upperLeftPrevious = {info[0],info[1]};
         int[] upperLeftNext = {info[2],info[3]};
 
@@ -210,34 +236,39 @@ public class Solver {
         if (moveStack.isEmpty() || currentMove.equals(move.parentMove)){
             board.removeBlock(blockDimension,upperLeftPrevious,true);
             board.addBlock(blockDimension,upperLeftNext,true);
+//            System.out.println("HOW MANY TIMES IS THIS CALLED?");
         } else {
             Move commonAncsestor  = moveStack.pop();
             Move bestMoveAncestor = move.parentMove;
             Stack<Move> travelBackDown = new Stack<Move>();
-            while (!moveStack.isEmpty() && bestMoveAncestor != null){
-                moveQueue.add(commonAncsestor);
-                commonAncsestor = moveStack.pop();
 
-                undoMove(board,commonAncsestor);
+            FINDCOMMONANCESTOR:
+                while (!moveStack.isEmpty() && bestMoveAncestor != null){
 
-                travelBackDown.push(bestMoveAncestor);
-                bestMoveAncestor = bestMoveAncestor.parentMove;
+                    moveQueue.add(commonAncsestor);
+                    commonAncsestor = moveStack.pop();
 
-                if (commonAncsestor.equals(bestMoveAncestor)){
-                    while (!travelBackDown.isEmpty()){
-                        Move movingMove = travelBackDown.pop();
-                        moveStack.push(movingMove);
-                        doMove(board, movingMove);
+                    undoMove(board,commonAncsestor);
+
+                    travelBackDown.push(bestMoveAncestor);
+                    bestMoveAncestor = bestMoveAncestor.parentMove;
+
+                    if (commonAncsestor.equals(bestMoveAncestor)){
+                        while (!travelBackDown.isEmpty()){
+                            Move movingMove = travelBackDown.pop();
+                            moveStack.push(movingMove);
+                            doMove(board, movingMove);
+                        }
+                        break FINDCOMMONANCESTOR;
+                    } else {
+                        continue;
                     }
-                } else {
-                    continue;
-                }
 
-            }
+                }
         }
     }
 
-    public static void undoMove(Board board, Move move){
+    public void undoMove(Board board, Move move){
         //Remove the children from the queue here.
         int[] info;
         String blockDimension;
@@ -246,7 +277,7 @@ public class Solver {
 
         moveQueue.add(move); //YOU MUST ADD THIS MOVE BACK TO THE QUEUE!
         info = move.getInfo();
-        blockDimension = "" + info[4] + info[5];
+        blockDimension = "" + info[4] +" "+  info[5];
 
         upperLeftPrevious = new int[2];
         upperLeftPrevious[0] = info[0];
