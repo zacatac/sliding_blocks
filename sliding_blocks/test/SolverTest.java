@@ -39,8 +39,13 @@ public class SolverTest extends TestCase {
 
         Solver.main(args);
 
-        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
-        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+//
+//        Solver.main(args);
+
+        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.txt";
+        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.goal.txt";
 
         Solver.main(args);
 
