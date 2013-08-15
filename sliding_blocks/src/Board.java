@@ -106,6 +106,10 @@ public class Board{
         }
     }
 
+    public void addCurrentBoardToHistory(){
+        this.moveHistory.add(this.toString());
+    }
+
     @Override
 	public String toString() {
 		String rtn="";
@@ -140,7 +144,7 @@ public class Board{
 
 
 	// finds all possible moves
-    public ArrayList<Move> findMoves(int depth){
+    public ArrayList<Move> findMoves(int depth, Move parentMove){
 
 
         ArrayList<Move> moves = new ArrayList<Move>();
@@ -157,26 +161,26 @@ public class Board{
 
                 if (freeToMove[0]){
                     if (thisMoveWorked(block,key,true,false)){
-                        Move move = new Move(block[0],block[1],block[0]-1,block[1],dimensions[0],dimensions[1],depth);
+                        Move move = new Move(block[0],block[1],block[0]-1,block[1],dimensions[0],dimensions[1],depth,parentMove);
                         moves.add(move);
                     }
                 }
                 if (freeToMove[1]){
                     if(thisMoveWorked(block,key,true,true)){
-                        Move move = new Move(block[0],block[1],block[0]+1,block[1],dimensions[0],dimensions[1],depth);
+                        Move move = new Move(block[0],block[1],block[0]+1,block[1],dimensions[0],dimensions[1],depth,parentMove);
                         moves.add(move);
                     }
                 }
                 if (freeToMove[2]){
                     if(thisMoveWorked(block,key,false,false)){
-                        Move move = new Move(block[0],block[1],block[0],block[1]-1,dimensions[0],dimensions[1],depth);
+                        Move move = new Move(block[0],block[1],block[0],block[1]-1,dimensions[0],dimensions[1],depth,parentMove);
                         moves.add(move);
                     }
 
                 }
                 if (freeToMove[3]){
                     if(thisMoveWorked(block,key,false,true)){
-                        Move move = new Move(block[0],block[1],block[0],block[1]+1,dimensions[0],dimensions[1],depth);
+                        Move move = new Move(block[0],block[1],block[0],block[1]+1,dimensions[0],dimensions[1],depth,parentMove);
                         moves.add(move);
                     }
 
@@ -208,7 +212,7 @@ public class Board{
         this.addBlock(key,newBlock,false);
         if (!moveHistory.contains(this.toString())) {
             rtn = true;
-            moveHistory.add(this.toString());
+            addCurrentBoardToHistory();
         }
         this.removeBlock(key,newBlock,false);
         this.addBlock(key,block,false);

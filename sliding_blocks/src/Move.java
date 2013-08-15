@@ -56,23 +56,6 @@ public class Move implements Comparable {
         this.parentMove = parentMove;
     }
 
-    public Move(int previousRow,     //0
-                int previousColumn,  //1
-                int nextRow,         //2
-                int nextColumn,      //3
-                int dimRows,         //4
-                int dimColumns,      //5
-                int depth            //6
-                    ){
-        this(previousRow,
-                previousColumn,
-                nextRow,
-                nextColumn,
-                dimRows,
-                dimColumns,
-                depth,
-                null);
-    }
 
     public Move(int[] alreadyFormed, Move parentMove){
         this.info = alreadyFormed;

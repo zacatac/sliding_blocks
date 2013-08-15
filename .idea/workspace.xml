@@ -5,12 +5,12 @@
     <ignored path="sliding_blocks.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/fragment.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376333172515" ignored="false" />
-    <file path="/Board.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376365242806" ignored="false" />
-    <file path="/Solver.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376369274626" ignored="false" />
+    <file path="/Board.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376538724888" ignored="false" />
+    <file path="/Solver.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376538737755" ignored="false" />
     <file path="/Dummy.txt" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376333167851" ignored="false" />
     <file path="/Move.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376363837225" ignored="false" />
     <file path="/BoardTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376337362864" ignored="false" />
-    <file path="/MoveTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376339019558" ignored="false" />
+    <file path="/MoveTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376537751030" ignored="false" />
     <file path="/SolverTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376361670821" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,24 +77,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Board.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Board.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="0" selection-start="4228" selection-end="4228" vertical-scroll-proportion="-0.045994066">
+            <state line="214" column="39" selection-start="7018" selection-end="7018" vertical-scroll-proportion="0.24">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Solver.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Solver.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="25" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#321#327#0" expanded="true" />
-                <element signature="e#393#399#0" expanded="true" />
-                <element signature="e#5161#5167#0" expanded="true" />
-              </folding>
+            <state line="141" column="0" selection-start="4510" selection-end="4510" vertical-scroll-proportion="1.0755209">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -102,7 +98,7 @@
       <file leaf-file-name="Move.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Move.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="34" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
+            <state line="57" column="0" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -111,7 +107,7 @@
       <file leaf-file-name="BoardTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/test/BoardTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="38" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0">
+            <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="-8.96">
               <folding />
             </state>
           </provider>
@@ -120,7 +116,7 @@
       <file leaf-file-name="SolverTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="27" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0">
+            <state line="45" column="26" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -129,7 +125,7 @@
       <file leaf-file-name="MoveTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/test/MoveTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="56" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
+            <state line="87" column="47" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -148,8 +144,8 @@
         <option value="$PROJECT_DIR$/sliding_blocks/src/Block.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/SolverTest" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/BoardTest.java" />
-        <option value="$PROJECT_DIR$/sliding_blocks/test/MoveTest.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/src/Move.java" />
+        <option value="$PROJECT_DIR$/sliding_blocks/test/MoveTest.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/SolverTest.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/src/Board.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/src/Solver.java" />
@@ -202,12 +198,12 @@
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="dynamic.classpath" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
@@ -238,19 +234,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -276,6 +259,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -455,16 +451,16 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24554294" sideWeight="0.67236465" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32763532" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37749287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -550,19 +546,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/InputSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="26" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="61" column="26" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="87" column="28" selection-start="2762" selection-end="2762" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#321#327#0" expanded="true" />
-            <element signature="e#393#399#0" expanded="true" />
-            <element signature="e#5161#5167#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -590,9 +580,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/InputSource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="26" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.8108108">
-          <folding />
-        </state>
+        <state line="61" column="26" selection-start="1581" selection-end="1581" vertical-scroll-proportion="0.8108108" />
       </provider>
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_25.jdk/Contents/Home/src.zip!/java/util/Stack.java">
@@ -602,46 +590,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Move.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="34" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="27" selection-start="1190" selection-end="1190" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/MoveTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1848" selection-end="1848" vertical-scroll-proportion="0.0">
+        <state line="57" column="0" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/test/BoardTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="38" column="0" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.0">
+        <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="-8.96">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/MoveTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="47" selection-start="2730" selection-end="2730" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="26" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="214" column="39" selection-start="7018" selection-end="7018" vertical-scroll-proportion="0.24">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="25" selection-start="175" selection-end="175" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#321#327#0" expanded="true" />
-            <element signature="e#393#399#0" expanded="true" />
-            <element signature="e#5161#5167#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="0" selection-start="4228" selection-end="4228" vertical-scroll-proportion="-0.045994066">
+        <state line="141" column="0" selection-start="4510" selection-end="4510" vertical-scroll-proportion="1.0755209">
           <folding />
         </state>
       </provider>

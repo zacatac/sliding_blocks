@@ -9,7 +9,7 @@ import java.util.*;
  */
 // GITHUB TEST - CHERYL
 public class Solver {
-    public static final boolean iamDebugging = false;
+    public static final boolean iamDebugging = true;
     private Stack<Move> moveStack = new Stack<Move>();
     private  PriorityQueue<Move> moveQueue = new PriorityQueue<Move>();
     private Board board;
@@ -81,6 +81,7 @@ public class Solver {
             }
             makeBlock(solver.board, s, row, col, newSource.lineNumber(), true);
         }
+//        solver.board.addCurrentBoardToHistory();
 
         InputSource goalSource = new InputSource(args[1]); //change to args[1] when you setup the option
         //Everything else.
@@ -111,8 +112,11 @@ public class Solver {
 
     public  void solveTheDamnPuzzle (Board board, Board goalBoard){
         int depth = 1;
+        Move initialMove = new Move(0,0,0,0,0,0,0,null);
+        moveStack.push(initialMove);
 
-        ArrayList<Move> firstAvailableMoves = board.findMoves(depth);
+
+        ArrayList<Move> firstAvailableMoves = board.findMoves(depth, initialMove);
         for (Move move:firstAvailableMoves){
             moveQueue.add(move);
         }
@@ -125,12 +129,16 @@ public class Solver {
             theWinnersCircle();
             return;
         }
+
+
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
-            System.out.println("BEST MOVE POLLED: " + bestMove);
             if (iamDebugging){
                 System.out.println("BEST MOVE: " + bestMove);
+                System.out.println("SIZE OF QUEUE: " + moveQueue.size());
+
             }
+
             doMove(board,bestMove);
 
             moveStack.push(bestMove);
@@ -141,7 +149,7 @@ public class Solver {
                 theWinnersCircle();
             }
             depth = bestMove.getInfo()[6]++;
-            ArrayList<Move> nextAvailableMoves = board.findMoves(depth);
+            ArrayList<Move> nextAvailableMoves = board.findMoves(depth,bestMove);
             for (Move move: nextAvailableMoves){
                 moveQueue.add(move);
             }
@@ -215,67 +223,76 @@ public class Solver {
     }
 
     //Completes an actual move and updates the move.
-    public  void doMove(Board board, Move move){
-        int[] info = move.getInfo();
-        int depth = info[6];
-        String blockDimension = "" + info[4] +" "+ info[5];
-        int[] upperLeftPrevious = {info[0],info[1]};
-        int[] upperLeftNext = {info[2],info[3]};
+    public  void doMove(Board board, Move nextMove){
 
         //This while loop will bring you back to the depth
         // at which you can complete the move you were given.
         Move currentMove = null;
+        Stack<Move> travelBackDown = new Stack<Move>();
+        Move travelFrom = nextMove;
         if (!moveStack.isEmpty()){
             Move topMove = moveStack.peek();
-            while (!moveStack.isEmpty() || depth >= topMove.getInfo()[6]){
-                undoMove(board,moveStack.pop());
-                topMove = moveStack.peek();
+            if (iamDebugging){
+                System.out.println("MOVE DEPTH: " + topMove.getInfo()[6]);
+                System.out.println("NEXT MOVE DEPTH: " + nextMove.getInfo()[6]);
+
+            }
+
+            while (travelFrom.getInfo()[6] != 1 + topMove.getInfo()[6]){
+                if (travelFrom.getInfo()[6] <= topMove.getInfo()[6]) {
+                    undoMove(board,moveStack.pop());
+                    topMove = moveStack.peek();
+                    continue;
+                } else if (travelFrom.getInfo()[6] > topMove.getInfo()[6] + 1){
+                    topMove = moveStack.peek();
+                    travelBackDown.push(travelFrom);
+                    travelFrom = travelFrom.parentMove;
+                    continue;
+                } else{
+                    System.out.println("WHAAAAAAA?");
+                }
+
             }
             currentMove = moveStack.peek();
         }
-        if (moveStack.isEmpty() || currentMove.equals(move.parentMove)){
+
+        if (currentMove.equals(travelFrom.parentMove)){
+            int[] info = travelFrom.getInfo();
+            String blockDimension = "" + info[4] +" "+ info[5];
+            int[] upperLeftPrevious = {info[0],info[1]};
+            int[] upperLeftNext = {info[2],info[3]};
+
             board.removeBlock(blockDimension,upperLeftPrevious,true);
             board.addBlock(blockDimension,upperLeftNext,true);
-//            System.out.println("HOW MANY TIMES IS THIS CALLED?");
+
         } else {
-            Move commonAncsestor  = moveStack.pop();
-            Move bestMoveAncestor = move.parentMove;
-            Stack<Move> travelBackDown = new Stack<Move>();
-
-            FINDCOMMONANCESTOR:
-                while (!moveStack.isEmpty() && bestMoveAncestor != null){
-
-                    moveQueue.add(commonAncsestor);
-                    commonAncsestor = moveStack.pop();
-
-                    undoMove(board,commonAncsestor);
-
-                    travelBackDown.push(bestMoveAncestor);
-                    bestMoveAncestor = bestMoveAncestor.parentMove;
-
-                    if (commonAncsestor.equals(bestMoveAncestor)){
+            Move commonAncsestorCandidate  = moveStack.pop();
+            Move TravellingFromAncestor = travelFrom.parentMove;
+                while (true){
+                    if (commonAncsestorCandidate.equals(TravellingFromAncestor)){
                         while (!travelBackDown.isEmpty()){
                             Move movingMove = travelBackDown.pop();
                             moveStack.push(movingMove);
                             doMove(board, movingMove);
                         }
-                        break FINDCOMMONANCESTOR;
-                    } else {
-                        continue;
+                        break;
                     }
+                    commonAncsestorCandidate = moveStack.pop();
 
+                    undoMove(board,commonAncsestorCandidate);
+
+                    travelBackDown.push(TravellingFromAncestor);
+                    TravellingFromAncestor = TravellingFromAncestor.parentMove;
                 }
         }
     }
 
     public void undoMove(Board board, Move move){
-        //Remove the children from the queue here.
         int[] info;
         String blockDimension;
         int[] upperLeftPrevious;
         int[] upperLeftNext;
 
-        moveQueue.add(move); //YOU MUST ADD THIS MOVE BACK TO THE QUEUE!
         info = move.getInfo();
         blockDimension = "" + info[4] +" "+  info[5];
 

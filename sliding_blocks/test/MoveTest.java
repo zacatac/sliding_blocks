@@ -39,11 +39,11 @@ public class MoveTest {
         goalBoard.addBlock("1 1",block6,false);
         Move initialize = new Move(goalBoard);
 
-        Move move1 = new Move(0,0,0,1,1,1,0); //Nearest block is {0,7} score: 6
-        Move move2 = new Move(0,0,0,1,1,1,2); //Nearest block is {0,7} score: 8
-        Move move3 = new Move(8,3,8,4,1,1,0); //Nearest block is {9,3} score: 2
-        Move move4 = new Move(4,0,5,0,1,1,0); //Nearest block is {5,0} score: 3
-        Move move5 = new Move(6,5,6,6,2,2,0); //Nearest block is {8,8} score: 4
+        Move move1 = new Move(0,0,0,1,1,1,0,null); //Nearest block is {0,7} score: 6
+        Move move2 = new Move(0,0,0,1,1,1,2,null); //Nearest block is {0,7} score: 8
+        Move move3 = new Move(8,3,8,4,1,1,0,null); //Nearest block is {9,3} score: 2
+        Move move4 = new Move(4,0,5,0,1,1,0,null); //Nearest block is {5,0} score: 3
+        Move move5 = new Move(6,5,6,6,2,2,0,null); //Nearest block is {8,8} score: 4
 
         assertEquals(6,move1.myScore);
         assertEquals(8,move2.myScore);
@@ -58,34 +58,34 @@ public class MoveTest {
 
     @Test
     public void testEquals() throws Exception {
-        Move move = new Move(0,0,0,0,0,0,0);
+        Move move = new Move(0,0,0,0,0,0,0,null);
 
         Move move1 = null;
         assertFalse(move.equals(move1));
 
-        Move move2 = new Move(0000000,0,0,0,0,0,0);
+        Move move2 = new Move(0000000,0,0,0,0,0,0,null);
         assertTrue(move.equals(move2));
 
-        Move move3 = new Move(0,0,0,0,0,0,1);
+        Move move3 = new Move(0,0,0,0,0,0,1,null);
         assertFalse(move.equals(move3));
 
-        Move move4 = new Move(0,0,0,0,1,0,0);
+        Move move4 = new Move(0,0,0,0,1,0,0,null);
         assertFalse(move.equals(move4));
 
-        Move move5 = new Move(0,0,0,1,0,0,0);
+        Move move5 = new Move(0,0,0,1,0,0,0,null);
         assertFalse(move.equals(move5));
 
-        Move move6 = new Move(0,0,1,0,0,0,0);
+        Move move6 = new Move(0,0,1,0,0,0,0,null);
         assertFalse(move.equals(move6));
 
-        Move move7 = new Move(0,1,0,0,0,0,1);
+        Move move7 = new Move(0,1,0,0,0,0,1,null);
         assertFalse(move.equals(move7));
 
     }
 
     @Test
     public void testToString() throws Exception {
-        Move move = new Move(0,1,1,1,2,2,5);
+        Move move = new Move(0,1,1,1,2,2,5,null);
         String expected = "[0 1 1 1 2 2 5]";
         assertEquals(expected,move.toString());
 
