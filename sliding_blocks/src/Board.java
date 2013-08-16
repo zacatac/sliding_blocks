@@ -82,7 +82,19 @@ public class Board{
     	if (blocks == null) {
     		throw new NullPointerException("no blocks to remove");
     	}
-    	blocks.remove(upperleft);
+    	int[] temp = new int[2];
+    	for (int[] b:blocks) {
+    		if (Arrays.toString(b).equals(Arrays.toString(upperleft))) {
+    			temp = b;
+    			break;
+//    			System.out.println("before" + this);
+//    			blocks.remove(b);
+//    			System.out.println("after   " + this);
+//    			System.out.print("AHHHH");
+    		}
+    	}
+    	blocks.remove(temp);
+    	//blocks.remove(upperleft);
         if (blocks.isEmpty()){
             board.remove(blockdimension);
         }
@@ -126,8 +138,26 @@ public class Board{
 		return rtn;
 	}
 
+//    @Override
+//    public boolean equals(Object o){
+//        Board argBoard = null;
+//        try{
+//            argBoard = (Board)o;
+//        } catch (ClassCastException c ){
+//            return false;
+//        }
+//        if (argBoard == null){
+//            return false;
+//        } else {
+//        	
+//            return this.toString().equals(argBoard.toString());
+//        }
+//
+//    }
+    
     @Override
     public boolean equals(Object o){
+    	Boolean rtn = true;
         Board argBoard = null;
         try{
             argBoard = (Board)o;
@@ -136,16 +166,27 @@ public class Board{
         }
         if (argBoard == null){
             return false;
-        } else {
-            return this.toString().equals(argBoard.toString());
         }
-
+        for (String i:argBoard.board.keySet()) {
+        	Iterator<int[]> iter = argBoard.board.get(i).iterator();
+			while (iter.hasNext()) {
+				int[] next = iter.next();
+				
+				
+				
+				for (int[] test: this.board.get(i)) {
+					if (!(test[0]==next[0]&&test[1]==next[1])) {
+						rtn = false;
+					}
+				}
+			}
+        }
+        return rtn;
     }
-
 
 	// finds all possible moves
     public ArrayList<Move> findMoves(int depth, Move parentMove){
-
+//if parentMove is null (initial condition) write base case
 
         ArrayList<Move> moves = new ArrayList<Move>();
         Set<String> keySet = board.keySet();
