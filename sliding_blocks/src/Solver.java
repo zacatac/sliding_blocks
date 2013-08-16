@@ -104,32 +104,36 @@ public class Solver {
             System.out.println(solver.goalBoard);
         }
         Move firstMove = new Move(goalBoard);
-
         solver.solveTheDamnPuzzle(solver.board, solver.goalBoard);
 
         
     }
 
     public  void solveTheDamnPuzzle (Board board, Board goalBoard){
+    	if (board.equals(goalBoard)){
+            theWinnersCircle();
+            return;
+        }
+
         int depth = 1;
         Move initialMove = new Move(0,0,0,0,0,0,0,null);
-        moveStack.push(initialMove);
 
+        moveStack.push(initialMove); //must be omitted when printing out final movestack.
 
         ArrayList<Move> firstAvailableMoves = board.findMoves(depth, initialMove);
+        
+
         for (Move move:firstAvailableMoves){
+
             moveQueue.add(move);
+
         }
         System.out.println("SIZE OF QUEUE: " + moveQueue.size());
         System.out.println("SIZE OF STACK: " + moveStack.size());
         System.out.println("BEST MOVE NOW: " + moveQueue.peek());
 
-        System.out.println("WIN STATUS: " + board.equals(goalBoard));
-        if (board.equals(goalBoard)){
-            theWinnersCircle();
-            return;
-        }
-
+        //System.out.println("WIN STATUS: " + board.equals(goalBoard));
+        
 
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
@@ -138,20 +142,29 @@ public class Solver {
                 System.out.println("SIZE OF QUEUE: " + moveQueue.size());
 
             }
-
+            System.out.println(board+ "  before!");
             doMove(board,bestMove);
+            System.out.println(board+"  after");
+            
 
             moveStack.push(bestMove);
-
-
+            System.out.println("moveQueue ~~~" + moveQueue);
+            System.out.println("moveStack ~~~" + moveStack);
+            System.out.println("WIN STATUS: " + board.equals(goalBoard));
             //Winning case
             if (board.equals(goalBoard)) {
+            	System.out.println("win shoul");
                 theWinnersCircle();
             }
-            depth = bestMove.getInfo()[6]++;
+            System.out.println("depth:::::: " +depth);
+            depth = bestMove.getInfo()[6];
+            depth++;
+            System.out.println("depth:::::: " +depth);
+            //depth++;
             ArrayList<Move> nextAvailableMoves = board.findMoves(depth,bestMove);
             for (Move move: nextAvailableMoves){
                 moveQueue.add(move);
+                System.out.println(depth + "relations!");
             }
         }
         System.out.println("You're shit outta luck...");
@@ -232,11 +245,11 @@ public class Solver {
         Move travelFrom = nextMove;
         if (!moveStack.isEmpty()){
             Move topMove = moveStack.peek();
-            if (iamDebugging){
-                System.out.println("MOVE DEPTH: " + topMove.getInfo()[6]);
-                System.out.println("NEXT MOVE DEPTH: " + nextMove.getInfo()[6]);
-
-            }
+//            if (iamDebugging){
+//                System.out.println("MOVE DEPTH: " + topMove.getInfo()[6]);
+//                System.out.println("NEXT MOVE DEPTH: " + nextMove.getInfo()[6]);
+//
+//            }
 
             while (travelFrom.getInfo()[6] != 1 + topMove.getInfo()[6]){
                 if (travelFrom.getInfo()[6] <= topMove.getInfo()[6]) {
