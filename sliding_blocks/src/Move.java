@@ -57,6 +57,9 @@ public class Move implements Comparable {
     }
 
 
+    public Move(boolean dummy, Move parentMove){//delete this
+    	this.myScore = 9001;
+    }
     public Move(int[] alreadyFormed, Move parentMove){
         this.info = alreadyFormed;
         this.myScore = calculateScore(this.info);
@@ -68,21 +71,34 @@ public class Move implements Comparable {
     }
 
     public static int calculateScore(int[] info) {
-        int toGoal = goalRows + goalColumns;  //can be optimized
+    	int toGoal = goalRows + goalColumns;//0;  //can be optimized
         int fromStart = info[6];              //can be optimized
         String key = info[4] + " " + info[5];
+        
         ArrayList<int[]> blocks = goalBoard.get(key);
+        
+        
+//        System.out.println("Size " + blocks.size());
+//        for (int[] i:blocks){
+//        	System.out.println(Arrays.toString(i));
+//        }
+//        
         if (!(blocks == null)){
+
+            System.out.println("DAS EST EIN TEST3");
             Iterator<int[]> iter = blocks.iterator();
             while (iter.hasNext()){
                 int[] thisBlock = iter.next();
                 int temp = Math.abs(info[2]-thisBlock[0])  + Math.abs(info[3] - thisBlock[1]);
+                if (temp==0) {
+                	return 9001;//LARGE SCORE ARBRITARY ATM
+                }
                 if (temp < toGoal){
                     toGoal = temp;
                 }
             }
         }
-
+        System.out.println(fromStart + toGoal + "     SCORE:   ");
         return fromStart + toGoal;
 //        return 0;
     }
