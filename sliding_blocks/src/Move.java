@@ -80,8 +80,6 @@ public class Move implements Comparable {
         String key = info[4] + " " + info[5];
         ArrayList<int[]> blocks = null;
         for (String i:goalBoard.keySet()) {
-        	System.out.println("key " + key);
-        	System.out.println("i "+ i);
         	if (i.equals(key)) {
         		blocks = goalBoard.get(i);
         	}
@@ -102,9 +100,9 @@ public class Move implements Comparable {
                 int[] thisBlock = iter.next();
                 System.out.println("next block " + Arrays.toString(thisBlock));
                 int temp = Math.abs(info[2]-thisBlock[0])  + Math.abs(info[3] - thisBlock[1]);
-                if (temp==0) {
-                	return 9001;//LARGE SCORE ARBRITARY ATM
-                }
+//                if (temp==0) {
+//                	return 9001;//LARGE SCORE ARBRITARY ATM since if we're at the goal don't want to move
+//                }
                 if (temp < toGoal){
                     toGoal = temp;
                 }
