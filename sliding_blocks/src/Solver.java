@@ -11,7 +11,7 @@ import java.util.*;
 public class Solver {
     public static final boolean iamDebugging = true;
     private Stack<Move> moveStack = new Stack<Move>();
-    private  PriorityQueue<Move> moveQueue = new PriorityQueue<Move>();
+    private  PriorityQueue<Move> moveQueue = new PriorityQueue<Move>(1000);
     private Board board;
     private Board goalBoard;
 
@@ -96,7 +96,8 @@ public class Solver {
             }
             solver.makeBlock(solver.goalBoard, s, row, col, goalSource.lineNumber(), false);
         }
-
+        String initialconfig = solver.board.toString(); //
+        solver.board.setMoveHistory(initialconfig);     //
         if (iamDebugging){
             System.out.println("INITIAL BOARD: ");
             System.out.println(solver.board);
@@ -116,7 +117,7 @@ public class Solver {
         }
 
         int depth = 1;
-        Move initialMove = new Move(0,0,0,0,0,0,0,null);
+        Move initialMove = new Move(0,0,0,0,0,0,0, null);
 
         moveStack.push(initialMove); //must be omitted when printing out final movestack.
 
@@ -138,8 +139,8 @@ public class Solver {
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
             if (iamDebugging){
-                System.out.println("BEST MOVE: " + bestMove);
-                System.out.println("SIZE OF QUEUE: " + moveQueue.size());
+//                System.out.println("BEST MOVE: " + bestMove);
+//                System.out.println("SIZE OF QUEUE: " + moveQueue.size());
 
             }
             System.out.println(board+ "  before!");
@@ -156,15 +157,14 @@ public class Solver {
             	System.out.println("win shoul");
                 theWinnersCircle();
             }
-            System.out.println("depth:::::: " +depth);
+//            System.out.println("depth:::::: " +depth);
             depth = bestMove.getInfo()[6];
             depth++;
-            System.out.println("depth:::::: " +depth);
+//            System.out.println("depth:::::: " +depth);
             //depth++;
             ArrayList<Move> nextAvailableMoves = board.findMoves(depth,bestMove);
             for (Move move: nextAvailableMoves){
                 moveQueue.add(move);
-                System.out.println(depth + "relations!");
             }
         }
         System.out.println("You're shit outta luck...");
@@ -245,6 +245,9 @@ public class Solver {
         Move travelFrom = nextMove;
         if (!moveStack.isEmpty()){
             Move topMove = moveStack.peek();
+//            if (topMove.parentMove == null){
+//            	return;
+//            }
 //            if (iamDebugging){
 //                System.out.println("MOVE DEPTH: " + topMove.getInfo()[6]);
 //                System.out.println("NEXT MOVE DEPTH: " + nextMove.getInfo()[6]);
