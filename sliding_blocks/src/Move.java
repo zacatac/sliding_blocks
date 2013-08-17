@@ -51,9 +51,13 @@ public class Move implements Comparable {
         this.info[4] = dimRows;
         this.info[5] = dimColumns;
         this.info[6] = depth;
-
-        this.myScore = calculateScore(this.info);
         this.parentMove = parentMove;
+        if (this.parentMove!=null) {
+        	this.myScore = calculateScore(this.info);
+        } else {
+        	this.myScore = 9000001;
+        }
+        
     }
 
 
@@ -76,8 +80,7 @@ public class Move implements Comparable {
         String key = info[4] + " " + info[5];
         
         ArrayList<int[]> blocks = goalBoard.get(key);
-        
-        
+      
 //        System.out.println("Size " + blocks.size());
 //        for (int[] i:blocks){
 //        	System.out.println(Arrays.toString(i));
@@ -98,7 +101,7 @@ public class Move implements Comparable {
                 }
             }
         }
-        System.out.println(fromStart + toGoal + "     SCORE:   ");
+        //System.out.println(fromStart + toGoal + "     SCORE:   ");
         return fromStart + toGoal;
 //        return 0;
     }
