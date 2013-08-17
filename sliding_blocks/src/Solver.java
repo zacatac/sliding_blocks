@@ -104,7 +104,7 @@ public class Solver {
             System.out.println("GOAL BOARD: ");
             System.out.println(solver.goalBoard);
         }
-        Move firstMove = new Move(goalBoard);
+        Move firstMove = new Move(solver.goalBoard);
         solver.solveTheDamnPuzzle(solver.board, solver.goalBoard);
 
         
@@ -185,10 +185,12 @@ public class Solver {
         while (!moveStack.isEmpty()) {
             movesBackward.add(0, moveStack.pop());
         }
+        movesBackward.remove(0);
         for (Move move:movesBackward){
             int[] info = move.getInfo();
             System.out.println("[ ("+ info[0] + "," + info[1]+") ("+ info[2] + "," + info[3]+") ]");
         }
+        System.exit(9001);
     }
 
 
