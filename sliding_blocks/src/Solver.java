@@ -143,9 +143,9 @@ public class Solver {
 //                System.out.println("SIZE OF QUEUE: " + moveQueue.size());
 
             }
-            System.out.println(board+ "  before!");
+            System.out.println("BEFORE DOING MOVE: "+ board);
             doMove(board,bestMove);
-            System.out.println(board+"  after");
+            System.out.println("AFTER DOING MOVE: "+ board);
             
 
             moveStack.push(bestMove);
