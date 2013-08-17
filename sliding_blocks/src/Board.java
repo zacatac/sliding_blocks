@@ -6,7 +6,7 @@ public class Board{
 	private boolean[][] notEmpty;
     private HashSet<String> moveHistory = new HashSet<String>();
     private int row, col;
-
+    
 
     public Board(int numberOfRows, int numberOfColumns){
     	row = numberOfRows;
@@ -25,6 +25,9 @@ public class Board{
     }
     public HashSet<String> getMoveHistory(){
         return moveHistory;
+    }
+    public void setMoveHistory(String s){
+    	moveHistory.add(s);
     }
     public int[] getRowsAndColumns(){
         int[] rtn = {row,col};
@@ -167,21 +170,38 @@ public class Board{
         if (argBoard == null){
             return false;
         }
+        
         for (String i:argBoard.board.keySet()) {
-        	Iterator<int[]> iter = argBoard.board.get(i).iterator();
-			while (iter.hasNext()) {
-				int[] next = iter.next();
-				
-				
-				
-				for (int[] test: this.board.get(i)) {
-					if (!(test[0]==next[0]&&test[1]==next[1])) {
-						rtn = false;
-					}
-				}
-			}
+        	ArrayList<int[]> goalArrayforDim = argBoard.board.get(i);
+        	ArrayList<String> strings = new ArrayList();
+        	for (int[] x: this.board.get(i)){
+        		strings.add(Arrays.toString(x));
+        	}
+        	System.out.println(strings);
+        	for (int[] test : goalArrayforDim) {
+        		String testVar = Arrays.toString(test);
+        		if (!strings.contains(testVar)){
+        			return false;
+        		}
+        	}
         }
+
         return rtn;
+//      for (String i:argBoard.board.keySet()) {
+//    	Iterator<int[]> iter = argBoard.board.get(i).iterator();
+//		while (iter.hasNext()) {
+//			int[] next = iter.next();
+//
+//
+//
+//			for (int[] test: this.board.get(i)) {
+//				if (!(test[0]==next[0]&&test[1]==next[1])) {
+//					rtn = false;
+//				}
+//			}
+//		}
+//    }
+//    return rtn;
     }
 
 	// finds all possible moves
@@ -253,6 +273,8 @@ public class Board{
         this.addBlock(key,newBlock,false);
         if (!moveHistory.contains(this.toString())) {
             rtn = true;
+//            System.out.println();
+//            System.out.println("LALALALALALALA OVER HERERERERERERERE;laksdsl;afsdl;dsal;al;adkls;dslkl;jl");
             addCurrentBoardToHistory();
         }
         this.removeBlock(key,newBlock,false);
