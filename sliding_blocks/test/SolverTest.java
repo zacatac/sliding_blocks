@@ -22,22 +22,44 @@ public class SolverTest extends TestCase {
     public void testimport() {
 
 
-        String[] args = new String[2];
-        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.txt";
-        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.goal.txt";
+        //UPDATED 140
+        
+        String[] args1 = new String[2];
+        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
+        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
 
-        Solver.main(args);
+        Solver.main(args1);
+        
+        //UPDATED BIG BLOCK 4
+        String[] args1 = new String[2];
+        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
+        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
 
-        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.txt";
-        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.goal.txt";
+        Solver.main(args1);
+        
 
-        Solver.main(args);
+        String[] args2 = new String[2];
+        args2[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
+        args2[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
+
+        Solver.main(args2);
+
+        String[] args3 = new String[2];
+        args3[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.txt";
+        args3[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.goal.txt";
+
+        Solver.main(args3);
+
+        args4[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.txt";
+        args4[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.goal.txt";
+
+        Solver.main(args4);
 
 
-        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.txt";
-        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.goal.txt";
+        args5[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.txt";
+        args5[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.goal.txt";
 
-        Solver.main(args);
+        Solver.main(args5);
 
 //        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
 //        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
