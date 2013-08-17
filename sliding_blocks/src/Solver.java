@@ -120,7 +120,7 @@ public class Solver {
         Move initialMove = new Move(0,0,0,0,0,0,0, null);
 
         moveStack.push(initialMove); //must be omitted when printing out final movestack.
-
+        System.out.println("initialMove's myscore: " + initialMove.myScore);
         ArrayList<Move> firstAvailableMoves = board.findMoves(depth, initialMove);
         
 
@@ -129,15 +129,17 @@ public class Solver {
             moveQueue.add(move);
 
         }
-        System.out.println("SIZE OF QUEUE: " + moveQueue.size());
-        System.out.println("SIZE OF STACK: " + moveStack.size());
-        System.out.println("BEST MOVE NOW: " + moveQueue.peek());
+        System.out.println("moveQueue ~~~" + moveQueue);
+        for (Move i: moveQueue) {
+        	System.out.println(i+ " score " + i.myScore + " depth " + i.getInfo()[6]);
+        }
 
         //System.out.println("WIN STATUS: " + board.equals(goalBoard));
         
 
         while (!moveQueue.isEmpty()){
             Move bestMove = moveQueue.poll();
+            System.out.println("BEST MOVE NOW: " + bestMove);
             if (iamDebugging){
 //                System.out.println("BEST MOVE: " + bestMove);
 //                System.out.println("SIZE OF QUEUE: " + moveQueue.size());
@@ -149,7 +151,7 @@ public class Solver {
             
 
             moveStack.push(bestMove);
-            System.out.println("moveQueue ~~~" + moveQueue);
+            
             System.out.println("moveStack ~~~" + moveStack);
             System.out.println("WIN STATUS: " + board.equals(goalBoard));
             //Winning case
@@ -165,6 +167,10 @@ public class Solver {
             ArrayList<Move> nextAvailableMoves = board.findMoves(depth,bestMove);
             for (Move move: nextAvailableMoves){
                 moveQueue.add(move);
+            }
+            System.out.println("moveQueue ~~~" + moveQueue);
+            for (Move i: moveQueue) {
+            	System.out.println(i+ " score " + i.myScore + " depth " + i.getInfo()[6]);
             }
         }
         System.out.println("You're shit outta luck...");
@@ -212,7 +218,7 @@ public class Solver {
             if ((rowUpper < 0 || rowUpper > maxRow) || (rowLower < 0 || rowLower > maxRow)){
                 throw new IllegalArgumentException("Invalid row inputs at line " + line);
             }
-            if ((colUpper < 0 || colUpper> maxCol) || (colLower < 0 || colLower > maxRow)){
+            if ((colUpper < 0 || colUpper> maxCol) || (colLower < 0 || colLower > maxCol)){//changed from colLower>maxRow
                 throw new IllegalArgumentException("Invalid column inputs at line " + line);
             }
             if (rowUpper > rowLower) {
