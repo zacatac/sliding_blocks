@@ -90,14 +90,9 @@ public class Board{
     		if (Arrays.toString(b).equals(Arrays.toString(upperleft))) {
     			temp = b;
     			break;
-//    			System.out.println("before" + this);
-//    			blocks.remove(b);
-//    			System.out.println("after   " + this);
-//    			System.out.print("AHHHH");
     		}
     	}
     	blocks.remove(temp);
-    	//blocks.remove(upperleft);
         if (blocks.isEmpty()){
             board.remove(blockdimension);
         }
@@ -140,23 +135,6 @@ public class Board{
 		}
 		return rtn;
 	}
-
-//    @Override
-//    public boolean equals(Object o){
-//        Board argBoard = null;
-//        try{
-//            argBoard = (Board)o;
-//        } catch (ClassCastException c ){
-//            return false;
-//        }
-//        if (argBoard == null){
-//            return false;
-//        } else {
-//        	
-//            return this.toString().equals(argBoard.toString());
-//        }
-//
-//    }
     
     @Override
     public boolean equals(Object o){

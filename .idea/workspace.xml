@@ -5,13 +5,13 @@
     <ignored path="sliding_blocks.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/fragment.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376333172515" ignored="false" />
-    <file path="/Board.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376538724888" ignored="false" />
-    <file path="/Solver.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376538737755" ignored="false" />
+    <file path="/Board.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376777337849" ignored="false" />
+    <file path="/Solver.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376777425101" ignored="false" />
     <file path="/Dummy.txt" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376333167851" ignored="false" />
     <file path="/Move.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376363837225" ignored="false" />
     <file path="/BoardTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376337362864" ignored="false" />
     <file path="/MoveTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376537751030" ignored="false" />
-    <file path="/SolverTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376361670821" ignored="false" />
+    <file path="/SolverTest.java" changelist="c42d7401-fc87-4c85-a12d-a91822495351" time="1376776710930" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,25 +80,25 @@
       <file leaf-file-name="Board.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="214" column="39" selection-start="7018" selection-end="7018" vertical-scroll-proportion="0.24">
+            <state line="119" column="22" selection-start="3724" selection-end="3724" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Solver.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Solver.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Solver.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="0" selection-start="4510" selection-end="4510" vertical-scroll-proportion="1.0755209">
+            <state line="169" column="55" selection-start="5760" selection-end="5760" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Move.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Move.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Move.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="0" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0">
+            <state line="114" column="24" selection-start="3686" selection-end="3686" vertical-scroll-proportion="0.022255193">
               <folding />
             </state>
           </provider>
@@ -107,7 +107,7 @@
       <file leaf-file-name="BoardTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/test/BoardTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="-8.96">
+            <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -116,7 +116,7 @@
       <file leaf-file-name="SolverTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="45" column="26" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0">
+            <state line="99" column="78" selection-start="3492" selection-end="3492" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -144,11 +144,11 @@
         <option value="$PROJECT_DIR$/sliding_blocks/src/Block.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/SolverTest" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/BoardTest.java" />
-        <option value="$PROJECT_DIR$/sliding_blocks/src/Move.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/test/MoveTest.java" />
-        <option value="$PROJECT_DIR$/sliding_blocks/test/SolverTest.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/src/Board.java" />
         <option value="$PROJECT_DIR$/sliding_blocks/src/Solver.java" />
+        <option value="$PROJECT_DIR$/sliding_blocks/src/Move.java" />
+        <option value="$PROJECT_DIR$/sliding_blocks/test/SolverTest.java" />
       </list>
     </option>
   </component>
@@ -451,16 +451,16 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24554294" sideWeight="0.67236465" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37749287" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37606838" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3296875" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32905984" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -588,16 +588,9 @@
         <state line="83" column="0" selection-start="2073" selection-end="2073" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Move.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1718" selection-end="1718" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/test/BoardTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="-8.96">
+        <state line="360" column="29" selection-start="11420" selection-end="11429" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -609,23 +602,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="26" selection-start="1191" selection-end="1191" vertical-scroll-proportion="0.0">
+        <state line="119" column="22" selection-start="3724" selection-end="3724" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Board.java">
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/test/SolverTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="39" selection-start="7018" selection-end="7018" vertical-scroll-proportion="0.24">
+        <state line="99" column="78" selection-start="3492" selection-end="3492" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Solver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="0" selection-start="4510" selection-end="4510" vertical-scroll-proportion="1.0755209">
+        <state line="169" column="55" selection-start="5760" selection-end="5760" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sliding_blocks/src/Move.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="114" column="24" selection-start="3686" selection-end="3686" vertical-scroll-proportion="0.022255193">
           <folding />
         </state>
       </provider>

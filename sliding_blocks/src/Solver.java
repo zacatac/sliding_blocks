@@ -159,15 +159,15 @@ public class Solver {
             	System.out.println("win shoul");
                 theWinnersCircle();
             }
-//            System.out.println("depth:::::: " +depth);
             depth = bestMove.getInfo()[6];
             depth++;
-//            System.out.println("depth:::::: " +depth);
-            //depth++;
+            System.out.println("MOVE HISTORY SIZE BEFORE: " + board.getMoveHistory().size());
             ArrayList<Move> nextAvailableMoves = board.findMoves(depth,bestMove);
             for (Move move: nextAvailableMoves){
                 moveQueue.add(move);
+
             }
+            System.out.println("MOVE HISTORY SIZE AFTER: " + board.getMoveHistory().size());
             System.out.println("moveQueue ~~~" + moveQueue);
             for (Move i: moveQueue) {
             	System.out.println(i+ " score " + i.myScore + " depth " + i.getInfo()[6]);

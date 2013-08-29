@@ -24,52 +24,86 @@ public class SolverTest extends TestCase {
 
         //UPDATED 140
         
-        String[] args1 = new String[2];
-        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
-        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+//        String[] args1 = new String[2];
+//        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
+//        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+//
+//        Solver.main(args1);
+//
+//        //UPDATED BIG BLOCK 4
+//        String[] args1 = new String[2];
+//        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
+//        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
+//
+//        Solver.main(args1);
+//
+//
+//        String[] args2 = new String[2];
+//        args2[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
+//        args2[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
+//
+//        Solver.main(args2);
+//
+//        String[] args3 = new String[2];
+//        args3[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.txt";
+//        args3[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.goal.txt";
+//
+//        Solver.main(args3);
 
-        Solver.main(args1);
-        
-        //UPDATED BIG BLOCK 4
-        String[] args1 = new String[2];
-        args1[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
-        args1[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
-
-        Solver.main(args1);
-        
-
-        String[] args2 = new String[2];
-        args2[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.txt";
-        args2[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.block.4.goal.txt";
-
-        Solver.main(args2);
-
-        String[] args3 = new String[2];
-        args3[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.txt";
-        args3[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x1.goal.txt";
-
-        Solver.main(args3);
-
-        args4[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.txt";
-        args4[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.goal.txt";
-
-        Solver.main(args4);
-
-
-        args5[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.txt";
-        args5[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.goal.txt";
-
-        Solver.main(args5);
-
-//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
-//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+//        args4[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.txt";
+//        args4[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.one.block.goal.txt";
+//
+//        Solver.main(args4);
+//
+//
+//        args5[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.txt";
+//        args5[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/1x2.two.blocks.goal.txt";
+//
+//        Solver.main(args5);
+//
+////        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.txt";
+////        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/140x140.goal.txt";
+////
+////        Solver.main(args);
+//
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.goal.txt";
 //
 //        Solver.main(args);
 
-        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.txt";
-        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.search.2.goal.txt";
+//        String[] args = new String[2];
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/teds.2x2.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/teds.2x2.goal.txt";
+//
+//        Solver.main(args);
+//
+//        String[] args = new String[2];
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/teds.10x10.one.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/teds.10x10.one.goal.txt";
+//
+//        Solver.main(args);
+
+//        String[] args = new String[2];
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/blockado.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/blockado.goal.txt";
+//
+//        Solver.main(args);
+
+//        String[] args = new String[2];
+//        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.tray.3.txt";
+//        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/big.tray.3.goal.txt";
+//
+//        Solver.main(args);
+
+        String[] args = new String[2];
+        args[0] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/century-180.txt";
+        args[1] = "/Users/zrfield/GitHub/sliding_blocks/testfiles/century-180.goal.txt";
 
         Solver.main(args);
+
+
+
+
 
 
 
